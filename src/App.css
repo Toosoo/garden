@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  position:relative;
+  width:100%;
+  min-height:100vh;
+}
+#root,
+canvas {
+
+  position:fixed;
+  inset:0
+
+}
