@@ -9,7 +9,8 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <Canvas camera={{
       fov:60,
       near:.1,
-      far:3000
+      far:3000,
+      
     }}>
     <App />
     </Canvas>

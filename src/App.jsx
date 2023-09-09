@@ -7,24 +7,24 @@ import { Perf } from "r3f-perf";
 function App() {
   const { nodes, materials, animations } = useGLTF("/bee.glb");
   const grass = useGLTF("/grass.glb");
-  const fantasy = useGLTF("/fantasy.glb");
   const { actions, names, ref } = useAnimations(animations);
   useEffect(() => {
-   
     actions["Bee|BeeAction"].play();
   }, []);
   return (
     <>
-      
-      
+      <OrbitControls />
       <Environment preset="city" />
-      <Sky distance={4500}/>
+      <Sky distance={4500} />
       <Perf position="top-left" />
-      <group  rotation={[Math.PI * 1.5, 0, 0]} scale={.5} dispose={null}>
-        <skinnedMesh  geometry={nodes.Object_28.geometry} material={materials.Color} skeleton={nodes.Object_28.skeleton} />
-        <primitive object={nodes._rootJoint} ref={ref} />
+
+      <group>
+        <primitive object={grass.scene} position={[0, -30, 0]} />
+        <group rotation={[Math.PI * 1.5, 0, 0]} scale={0.5} dispose={null}>
+          <skinnedMesh geometry={nodes.Object_28.geometry} material={materials.Color} skeleton={nodes.Object_28.skeleton} />
+          <primitive object={nodes._rootJoint} ref={ref} />
+        </group>
       </group>
-      <primitive object={grass.scene} scale={3} position={[0,-100,0]} />
     </>
   );
 }
