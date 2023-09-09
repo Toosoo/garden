@@ -10,7 +10,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       fov:60,
       near:.1,
       far:3000,
-      
+     
     }}>
     <App />
     </Canvas>
