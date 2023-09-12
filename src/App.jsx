@@ -21,21 +21,11 @@ function App() {
   const skyRef = useRef();
   const lightRef = useRef();
   const garden = useGLTF("/garden2.glb");
-  let foo = { bar: 0 };
+
+
 
   useEffect(() => {
-    console.log(skyRef.current)
     const ctx = gsap.context(() => {
-
-
-      gsap.to(lightRef.current, {
-        intensity: 5,
-        duration: 2,
-        ease: "power2",
-      });
-    
-
-
     });
    
     return ()=> ctx.revert()
@@ -49,21 +39,23 @@ function App() {
 
   return (
     <>
+      <Perf position="top-left" />
       <OrbitControls />
-      <Environment preset="city" />
+
       {/* <Sky  distance={200} rayleigh={5.5} turbidity={80} inclination={.5} mieDirectionalG={.8}  /> */}
       <Sky ref={skyRef} distance={1000} rayleigh={rayleigh} turbidity={turbidity} inclination={inclination} mieDirectionalG={mieDirectionalG} mieCoefficient={mieCoefficient} />
-    
-      <Perf position="top-left" />
-      <SpotLight ref={lightRef} position={[-2, 5, 0]} penumbra={1} distance={7} angle={0.1} attenuation={10} anglePower={10} intensity={0} color={rayColor} />
+      <ambientLight intensity={2} />
+
+      {/* <SpotLight ref={lightRef} position={[-2, 5, 0]} penumbra={1} distance={7} angle={0.1} attenuation={10} anglePower={10} intensity={0} color={rayColor} /> */}
       <PositionalAudio autoplay loop url="/day.mp3" distance={5} />
   
       <group position={[0, -1, 0]}>
-        <primitive object={garden.scene} scale={0.04} />
+        <primitive object={garden.scene} scale={0.04} /> 
+      
       </group>
     </>
   );
 }
 
-useGLTF.preload("/bee.glb");
+useGLTF.preload("/garden2.glb");
 export default App;
