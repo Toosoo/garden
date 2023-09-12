@@ -52,10 +52,11 @@ function App() {
       <OrbitControls />
       <Environment preset="city" />
       {/* <Sky  distance={200} rayleigh={5.5} turbidity={80} inclination={.5} mieDirectionalG={.8}  /> */}
-      <Sky ref={skyRef} distance={1000} rayleigh={foo.bar} turbidity={turbidity} inclination={inclination} mieDirectionalG={mieDirectionalG} mieCoefficient={mieCoefficient} />
+      <Sky ref={skyRef} distance={1000} rayleigh={rayleigh} turbidity={turbidity} inclination={inclination} mieDirectionalG={mieDirectionalG} mieCoefficient={mieCoefficient} />
+    
       <Perf position="top-left" />
       <SpotLight ref={lightRef} position={[-2, 5, 0]} penumbra={1} distance={7} angle={0.1} attenuation={10} anglePower={10} intensity={0} color={rayColor} />
-      {/* <PositionalAudio autoplay loop url="/day.mp3" distance={5} /> */}
+      <PositionalAudio autoplay loop url="/day.mp3" distance={5} />
   
       <group position={[0, -1, 0]}>
         <primitive object={garden.scene} scale={0.04} />
