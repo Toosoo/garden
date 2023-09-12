@@ -1,8 +1,7 @@
 import "./App.css";
-import { Suspense, useEffect, useState } from "react";
-import React, { useRef } from "react";
+import { Suspense, useEffect, useState,useRef } from "react";
 import gsap from "gsap";
-import { useGLTF, useAnimations, OrbitControls, Environment, Clone, Sky, SpotLight, PositionalAudio } from "@react-three/drei";
+import { useGLTF, useAnimations, OrbitControls, Sky, SpotLight, PositionalAudio, Sparkles } from "@react-three/drei";
 import { Perf } from "r3f-perf";
 import { useControls } from "leva";
 import { useFrame } from "@react-three/fiber";
@@ -40,14 +39,14 @@ function App() {
   return (
     <>
       <Perf position="top-left" />
+      <ambientLight intensity={2}  />
+      <PositionalAudio autoplay loop url="/day.mp3" distance={5} />
+      {/* <Sparkles scale={3} size={2} opacity={1} color={'gold'} /> */}
       <OrbitControls />
-
+      
       {/* <Sky  distance={200} rayleigh={5.5} turbidity={80} inclination={.5} mieDirectionalG={.8}  /> */}
       <Sky ref={skyRef} distance={1000} rayleigh={rayleigh} turbidity={turbidity} inclination={inclination} mieDirectionalG={mieDirectionalG} mieCoefficient={mieCoefficient} />
-      <ambientLight intensity={2} />
-
       {/* <SpotLight ref={lightRef} position={[-2, 5, 0]} penumbra={1} distance={7} angle={0.1} attenuation={10} anglePower={10} intensity={0} color={rayColor} /> */}
-      <PositionalAudio autoplay loop url="/day.mp3" distance={5} />
   
       <group position={[0, -1, 0]}>
         <primitive object={garden.scene} scale={0.04} /> 
