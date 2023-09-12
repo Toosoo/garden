@@ -20,7 +20,7 @@ function App() {
 
   const skyRef = useRef();
   const lightRef = useRef();
-  const garden = useGLTF("/garden.glb");
+  const garden = useGLTF("/garden2.glb");
   let foo = { bar: 0 };
 
   useEffect(() => {
