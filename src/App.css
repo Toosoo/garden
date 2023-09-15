@@ -19,6 +19,9 @@ canvas {
     left: 50% !important;
   display:flex;
   justify-content:center
+}
 
-
+.switch .dot {
+  background-image:linear-gradient(#ffcc89,#d8860b);
+  
 }

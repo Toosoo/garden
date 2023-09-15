@@ -23,15 +23,15 @@ const Three = () => {
   const sparklesRef = useRef();
   const garden = useGLTF("/garden2.glb");
 
-
-
-  useLayoutEffect(() => {
+ 
+ 
+  useEffect(() => {
     const ctx = gsap.context((context) => {
       tl.current && tl.current.progress(0).kill();
       tl.current = gsap.timeline({defaults:{duration:1.5,ease:'power2.inOut'}})
-      .to(".dot", {
+      .to('.dot', {
         left: "58%",
-        backgroundImage:"linear-gradient(180deg,#777,#3a3a3a)",
+        backgroundImage:"linear-gradient(#777,#3a3a3a)",
       })
       .to(skyRef.current.material.uniforms.sunPosition.value, {
         x: 1,
@@ -46,29 +46,24 @@ const Three = () => {
         value: 0.05,
       },'<')
       .from(sparklesRef.current.material, {
-
         visible:false
-      },'<')
+      },'<50%')
       
     });
     return () => ctx.revert();
   }, []);
-
+ 
 
   useEffect(() => {
-    
-    console.log(sparklesRef.current)
     tl.current.reversed(reversed);    
   }, [reversed]);
-  
-
   useFrame((_, delta) => {
     garden.scene.rotation.y += delta * 0.05;
   });
-
+ 
   return (
     <>
-      <Html wrapperClass="switch">
+      <Html wrapperClass="switch" >
         <button className=" switcher relative flex justify-between items-center border rounded-full text-white  w-[110px] h-[50px] px-[13px]" onClick={() => setReversed(!reversed)}>
           <svg className="day" xmlns="http://www.w3.org/2000/svg" width="1.5em" viewBox="0 0 256 256">
             <path
@@ -79,14 +74,14 @@ const Three = () => {
           <svg className="night" xmlns="http://www.w3.org/2000/svg" width="1.5em" viewBox="0 0 256 256">
             <path fill="currentColor" d="M233.54 142.23a8 8 0 0 0-8-2a88.08 88.08 0 0 1-109.8-109.8a8 8 0 0 0-10-10a104.84 104.84 0 0 0-52.91 37A104 104 0 0 0 136 224a103.09 103.09 0 0 0 62.52-20.88a104.84 104.84 0 0 0 37-52.91a8 8 0 0 0-1.98-7.98Zm-44.64 48.11A88 88 0 0 1 65.66 67.11a89 89 0 0 1 31.4-26A106 106 0 0 0 96 56a104.11 104.11 0 0 0 104 104a106 106 0 0 0 14.92-1.06a89 89 0 0 1-26.02 31.4Z"></path>
           </svg>
-          <span className="dot absolute left-[4%] w-10 h-10 rounded-full bg-black z-[-1] bg-gradient-to-b from-[#ffcc89] to-[#d8860b] shadow-md"></span>
+          <span className="dot absolute left-[4%] w-10 h-10 rounded-full bg-black z-[-1]  shadow-md"></span>
         </button>
       </Html>
 
       <Perf position="top-left" />
       <ambientLight intensity={2} />
       <PositionalAudio autoplay loop url="/day.mp3" distance={5} />
-      <Sparkles ref={sparklesRef} scale={3} size={2}  color={'gold'}  />
+      <Sparkles ref={sparklesRef} scale={2} size={2}  color={'gold'}  />
       <OrbitControls />
       <Sky
         ref={skyRef}
