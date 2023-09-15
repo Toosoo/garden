@@ -19,19 +19,19 @@ const Three = () => {
 
   const [reversed, setReversed] = useState(true);
   const tl = useRef();
-
- 
   const skyRef = useRef();
+  const sparklesRef = useRef();
   const garden = useGLTF("/garden2.glb");
+
+
 
   useLayoutEffect(() => {
     const ctx = gsap.context((context) => {
       tl.current && tl.current.progress(0).kill();
-      tl.current = gsap.timeline()
+      tl.current = gsap.timeline({defaults:{duration:1.5,ease:'power2.inOut'}})
       .to(".dot", {
-        left: !reversed ? "5%" : "58%",
-        backgroundImage: !reversed ? "linear-gradient(180deg,#ffcc89,#d8860b)" : "linear-gradient(180deg,#777,#3a3a3a)",
-        ease: "power2.inOut",
+        left: "58%",
+        backgroundImage:"linear-gradient(180deg,#777,#3a3a3a)",
       })
       .to(skyRef.current.material.uniforms.sunPosition.value, {
         x: 1,
@@ -45,6 +45,10 @@ const Three = () => {
       .to(skyRef.current.material.uniforms.mieCoefficient, {
         value: 0.05,
       },'<')
+      .from(sparklesRef.current.material, {
+
+        visible:false
+      },'<')
       
     });
     return () => ctx.revert();
@@ -52,6 +56,8 @@ const Three = () => {
 
 
   useEffect(() => {
+    
+    console.log(sparklesRef.current)
     tl.current.reversed(reversed);    
   }, [reversed]);
   
@@ -80,7 +86,7 @@ const Three = () => {
       <Perf position="top-left" />
       <ambientLight intensity={2} />
       <PositionalAudio autoplay loop url="/day.mp3" distance={5} />
-      {/* <Sparkles scale={3} size={2} opacity={1} color={'gold'} /> */}
+      <Sparkles ref={sparklesRef} scale={3} size={2}  color={'gold'}  />
       <OrbitControls />
       <Sky
         ref={skyRef}
