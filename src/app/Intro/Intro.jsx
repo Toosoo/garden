@@ -1,6 +1,6 @@
 import { Suspense, useEffect, useState, useRef } from "react";
 
-export default function LoadScreen() {
+export default function Intro() {
   const [ready,setReady] = useState(false)
   
   return (
