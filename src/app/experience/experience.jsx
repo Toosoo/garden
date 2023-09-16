@@ -5,7 +5,7 @@ import { Perf } from "r3f-perf";
 import { useControls } from "leva";
 import { useFrame, Canvas } from "@react-three/fiber";
 
-const Three = () => {
+function Three({ready}){
   const { posX, posY, posZ, rayleigh, turbidity, mieDirectionalG, mieCoefficient, rayColor } = useControls({
     rayleigh: 0.5,
     turbidity: 10,
