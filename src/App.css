@@ -1,27 +1,27 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
 
 body {
-  position:relative;
-  width:100%;
-  min-height:100vh;
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  font-family: "Inter", sans-serif;
 }
 #root,
 canvas {
-
-  position:fixed;
-  inset:0
-
+  position: fixed;
+  inset: 0;
 }
 .switch {
   transform: translate(-50%, 20px) !important;
-    left: 50% !important;
-  display:flex;
-  justify-content:center
+  left: 50% !important;
+  display: flex;
+  justify-content: center;
+  z-index:10 !important
 }
 
 .switch .dot {
-  background-image:linear-gradient(#ffcc89,#d8860b);
-  
+  background-image: linear-gradient(#ffcc89, #d8860b);
 }

@@ -1,16 +1,20 @@
-import { lazy } from "react";
-
+import { Suspense, lazy, useEffect, useState } from "react";
 import "./App.css";
 import Experience from "./app/experience/experience";
-import LoadScreen from "./app/Intro/Intro";
-// const Experience = lazy(()=>import("./app/experience/experience"))
+import Intro from "./app/Intro/Intro";
+
 function App() {
- 
+
+  const [ready, setReady] = useState(false);
 
   return (
-     <LoadScreen>
-    <Experience/>
-     </LoadScreen>
+    <>
+    <Intro setReady={setReady} ready={ready}/>
+    <Suspense>
+    <Experience setReady={setReady} />
+    </Suspense>
+    </>
+     
 
   );
 }
