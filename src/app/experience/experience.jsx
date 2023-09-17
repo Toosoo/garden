@@ -5,7 +5,7 @@ import { Perf } from "r3f-perf";
 import { useControls } from "leva";
 import { useFrame, Canvas } from "@react-three/fiber";
 
-function Three({setReady}) {
+function Three({ setReady }) {
   const { posX, posY, posZ, rayleigh, turbidity, mieDirectionalG, mieCoefficient, rayColor } = useControls({
     rayleigh: 0.5,
     turbidity: 10,
@@ -24,11 +24,11 @@ function Three({setReady}) {
   const garden = useGLTF("/garden2.glb");
 
   useEffect(() => {
-    setReady(true)
+    setReady(true);
     const ctx = gsap.context((context) => {
       tl.current && tl.current.progress(0).kill();
       tl.current = gsap
-        .timeline({ defaults: {  ease: "power2.inOut" } })
+        .timeline({ defaults: { duration:1,ease: "sine" } })
         .to(".dot", {
           left: "58%",
           backgroundImage: "linear-gradient(#777,#3a3a3a)",
@@ -70,13 +70,13 @@ function Three({setReady}) {
   useEffect(() => {
     tl.current.reversed(reversed);
   }, [reversed]);
-  useFrame((_, delta) => {
-    garden.scene.rotation.y += delta * 0.05;
-  });
+  // useFrame((_, delta) => {
+  //   garden.scene.rotation.y += delta * 0.05;
+  // });
 
   return (
     <>
-      <Html wrapperClass="switch" >
+      <Html wrapperClass="switch">
         <button
           className=" switcher relative flex justify-between items-center border rounded-full text-white  w-[110px] h-[50px] px-[13px]"
           onClick={() => setReversed(!reversed)}>
@@ -114,10 +114,12 @@ function Three({setReady}) {
   );
 }
 
-export default function Experience({setReady}) {
+export default function Experience({ setReady }) {
   return (
     <Canvas camera={{ fov: 60, near: 0.1, far: 50 }}>
+      <Suspense>
       <Three setReady={setReady} />
+      </Suspense>
     </Canvas>
   );
 }
