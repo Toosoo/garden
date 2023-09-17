@@ -4,19 +4,11 @@ import { useGLTF, useAnimations, OrbitControls, Sky, PositionalAudio, Sparkles, 
 import { Perf } from "r3f-perf";
 import { useControls } from "leva";
 import { useFrame, Canvas } from "@react-three/fiber";
+import Text from "../Text/Text";
 
 function Three({ setReady }) {
-  const { posX, posY, posZ, rayleigh, turbidity, mieDirectionalG, mieCoefficient, rayColor } = useControls({
-    rayleigh: 0.5,
-    turbidity: 10,
-    mieDirectionalG: 0.8,
-    mieCoefficient: 0.05,
-    rayColor: "#fff",
-    posX: -0.8,
-    posY: 0.3,
-    posZ: -0.5,
-  });
-  const { active, progress, errors, item, loaded, total } = useProgress();
+
+
   const [dayTime, setDayTime] = useState(true);
   const tl = useRef();
   const skyRef = useRef();
@@ -112,6 +104,7 @@ function Three({ setReady }) {
       <group position={[0, -1, 0]}>
         <primitive object={garden.scene} scale={0.04} />
       </group>
+      <Text/>
     </>
   );
 }
