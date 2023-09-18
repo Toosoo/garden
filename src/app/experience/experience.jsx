@@ -2,28 +2,26 @@ import { Suspense, useEffect, useState, useRef, useLayoutEffect } from "react";
 import gsap from "gsap";
 import { useGLTF, useAnimations, OrbitControls, Sky, PositionalAudio, Sparkles, useProgress, Html } from "@react-three/drei";
 import { Perf } from "r3f-perf";
-import { useControls } from "leva";
 import { useFrame, Canvas } from "@react-three/fiber";
 import Text from "../Text/Text";
+import { Physics, RigidBody } from "@react-three/rapier";
 
 function Three({ setReady }) {
-
-
   const [dayTime, setDayTime] = useState(true);
   const tl = useRef();
   const skyRef = useRef();
   const sparklesRef = useRef();
   const garden = useGLTF("/garden2.glb");
-  const dayAudio = useRef()
-  const nightAudio = useRef()
+  const dayAudio = useRef();
+  const nightAudio = useRef();
 
   useEffect(() => {
-    dayAudio.current.play()
+    dayAudio.current.play();
     setReady(true);
     const ctx = gsap.context((context) => {
       tl.current && tl.current.progress(0).kill();
       tl.current = gsap
-        .timeline({ defaults: { duration:.7,ease: "sine" } })
+        .timeline({ defaults: { duration: 0.7, ease: "sine" } })
         .to(".dot", {
           left: "58%",
           backgroundImage: "linear-gradient(#777,#3a3a3a)",
@@ -60,7 +58,7 @@ function Three({ setReady }) {
         );
     });
     return () => ctx.revert();
-  },[]);
+  }, []);
 
   useEffect(() => {
     tl.current.reversed(dayTime);
@@ -91,29 +89,35 @@ function Three({ setReady }) {
 
       <Perf position="top-left" />
       <ambientLight intensity={2} />
-      <PositionalAudio  loop url="/day.mp3" distance={3} ref={dayAudio}  />
-      <PositionalAudio  loop url="/night.mp3" distance={3} ref={nightAudio}  />
+      <PositionalAudio loop url="/day.mp3" distance={3} ref={dayAudio} />
+      <PositionalAudio loop url="/night.mp3" distance={3} ref={nightAudio} />
       <Sparkles ref={sparklesRef} scale={2} size={2} color={"gold"} />
-      <OrbitControls makeDefault />
+      <OrbitControls />
+      {/* <OrbitControls enableZoom={false} enablePan={false} minPolarAngle={Math.PI / 2} maxPolarAngle={Math.PI / 2} /> */}
       <Sky
         ref={skyRef}
         sunPosition={[-0.8, 0.3, -0.5]} // 1,0,0 for dark
         turbidity={10} // 60 for dark
         mieCoefficient={0.005} // .05 for dark
       />
+     
+
       <group position={[0, -1, 0]}>
         <primitive object={garden.scene} scale={0.04} />
       </group>
-      <Text/>
+    
+      <Text />
     </>
   );
 }
 
 export default function Experience({ setReady }) {
   return (
-    <Canvas camera={{ fov: 60, near: 0.1, far: 50 }}>
+    <Canvas  camera={{ fov: 60, near: 0.1, far: 50 }}>
       <Suspense>
-      <Three setReady={setReady} />
+        <Physics gravity={[0, -20, 0]} debug>
+          <Three setReady={setReady} />
+        </Physics>
       </Suspense>
     </Canvas>
   );
