@@ -15,50 +15,65 @@ export default function Text() {
   });
 
   const fontProps = {
-    font: "/Climate Crisis.json",
+    font: "./fonts/Oswald_Regular.json",
     bevelEnabled: true,
-    bevelSize: 0.05,
-    bevelThickness: 0.07,
+    bevelSize: 0,
+    bevelThickness: 0.05,
+    curveSegments: 10,
+    bevelOffset: 0,
+    bevelSegments: 1,
     height: 0.01,
-    lineHeight: 0.5,
-    size: 0.5,
+    letterSpacing: 0.01,
+    size: 0.4,
   };
 
   return (
     <>
-    <Center>
-    <group>
-
-      <RigidBody position={[0, 0, 3]}>
-        <Text3D {...fontProps}>
-          T
-          <meshNormalMaterial color="blue" />
-        </Text3D>
-      </RigidBody>
-      <RigidBody position={[0, 0, 3.1]}>
-        <Text3D {...fontProps}>
-          o
-          <meshNormalMaterial color="blue" />
-        </Text3D>
-      </RigidBody>
-      <RigidBody position={[0, 0, 0]}>
-        <Text3D {...fontProps}>
-          s
-          <meshNormalMaterial color="blue" />
-        </Text3D>
-      </RigidBody>
-      <RigidBody position={[0, 0, 0]}>
-        <Text3D {...fontProps}>
-          o
-          <meshNormalMaterial color="blue" />
-        </Text3D>
-      </RigidBody>
-
+      <group position={[0, 0, 3.2]}>
+        <RigidBody position={[-0.4, 0, 0]} rotation-y={-0.2}>
+          <Text3D {...fontProps}>
+            T
+            <meshNormalMaterial color="blue" />
+          </Text3D>
+        </RigidBody>
+        <RigidBody position={[0, 0, 0]} rotation-y={0.1}>
+          <Text3D {...fontProps}>
+            O
+            <meshNormalMaterial color="blue" />
+          </Text3D>
+        </RigidBody>
+        <RigidBody position={[0.4, 0, 0]} rotation-y={0.1}>
+          <Text3D {...fontProps}>
+            S
+            <meshNormalMaterial color="blue" />
+          </Text3D>
+        </RigidBody>
+        <RigidBody position={[0.8, 0, 0]} rotation-y={0.2}>
+          <Text3D {...fontProps}>
+            O
+            <meshNormalMaterial color="green" />
+          </Text3D>
+        </RigidBody>
       </group>
-    </Center>
-       <RigidBody type="fixed">
-        <CuboidCollider args={[10, 10, 0.5]} position={[0, -1.5, 0]} rotation={[Math.PI * 0.5, 0, 0]} />
-      </RigidBody> 
+
+      <group position={[.4, 0, 2.2]}>
+        <RigidBody position={[0, 0, 1]}>
+          <Text3D {...fontProps} size={0.1} bevelThickness={0.03}>
+            CREATIVE
+            <meshNormalMaterial color="black" />
+          </Text3D>
+        </RigidBody>
+        <RigidBody position={[0.6, 0, 1]}>
+          <Text3D {...fontProps} size={0.1} bevelThickness={0.03}>
+            DEV
+            <meshNormalMaterial color="black" />
+          </Text3D>
+        </RigidBody>
+      </group>
+
+      <RigidBody type="fixed">
+        <CuboidCollider args={[10, 10, 0.5]} position={[0, -1.4, 0]} rotation={[Math.PI * 0.5, 0, 0]} />
+      </RigidBody>
     </>
   );
 }

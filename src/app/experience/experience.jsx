@@ -5,13 +5,14 @@ import { Perf } from "r3f-perf";
 import { useFrame, Canvas } from "@react-three/fiber";
 import Text from "../Text/Text";
 import { Physics, RigidBody } from "@react-three/rapier";
+import { Model } from "../Model/Model";
 
 function Three({ setReady }) {
   const [dayTime, setDayTime] = useState(true);
   const tl = useRef();
   const skyRef = useRef();
   const sparklesRef = useRef();
-  const garden = useGLTF("/garden2.glb");
+  const garden = useGLTF("/garden3.glb");
   const dayAudio = useRef();
   const nightAudio = useRef();
 
@@ -63,9 +64,7 @@ function Three({ setReady }) {
   useEffect(() => {
     tl.current.reversed(dayTime);
   }, [dayTime]);
-  // useFrame((_, delta) => {
-  //   garden.scene.rotation.y += delta * 0.05;
-  // });
+  
 
   return (
     <>
@@ -88,7 +87,7 @@ function Three({ setReady }) {
       </Html>
 
       <Perf position="top-left" />
-      <ambientLight intensity={2} />
+      <ambientLight intensity={3}  />
       <PositionalAudio loop url="/day.mp3" distance={3} ref={dayAudio} />
       <PositionalAudio loop url="/night.mp3" distance={3} ref={nightAudio} />
       <Sparkles ref={sparklesRef} scale={2} size={2} color={"gold"} />
@@ -103,7 +102,9 @@ function Three({ setReady }) {
      
 
       <group position={[0, -1, 0]}>
-        <primitive object={garden.scene} scale={0.04} />
+        {/* <primitive object={garden.scene} scale={0.04} /> */}
+
+        <Model/>
       </group>
     
       <Text />
@@ -113,9 +114,9 @@ function Three({ setReady }) {
 
 export default function Experience({ setReady }) {
   return (
-    <Canvas  camera={{ fov: 60, near: 0.1, far: 50 }}>
+    <Canvas  camera={{ fov: 60, near: 0.1, far: 50 , }}>
       <Suspense>
-        <Physics gravity={[0, -20, 0]} debug>
+        <Physics gravity={[0, -10, 0]} >
           <Three setReady={setReady} />
         </Physics>
       </Suspense>
@@ -123,4 +124,4 @@ export default function Experience({ setReady }) {
   );
 }
 
-useGLTF.preload("/garden2.glb");
+useGLTF.preload("/garden3.glb");
