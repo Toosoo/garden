@@ -122,7 +122,7 @@ function Three({ setReady }) {
 export default function Experience({ setReady }) {
   return (
     <Canvas>
-      <Physics>
+      <Physics debug>
         <Three setReady={setReady} />
       </Physics>
     </Canvas>

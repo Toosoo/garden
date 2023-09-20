@@ -1,6 +1,7 @@
-import { Center, Float, Text3D } from "@react-three/drei";
+import { Center, Float, PresentationControls, Text3D } from "@react-three/drei";
 import { RigidBody, Physics, CuboidCollider, TrimeshCollider } from "@react-three/rapier";
 import { useControls } from "leva";
+import { useRef } from "react";
 
 export default function Text() {
   const { posX, posY, posZ, rayleigh, turbidity, mieDirectionalG, mieCoefficient, rayColor } = useControls({
@@ -13,7 +14,7 @@ export default function Text() {
     posY: 0.3,
     posZ: -0.5,
   });
-  
+
   const fontProps = {
     font: "/src/assets/fonts/Oswald_Regular.json",
     bevelEnabled: true,
@@ -26,48 +27,58 @@ export default function Text() {
     letterSpacing: 0.01,
     size: 0.5,
   };
+  const testRef = useRef()
+  const pushIt = () =>{
+    console.log(testRef.current)
+    testRef.current.applyImpulse({x:0,y:.1,z:-.05})
+  }
 
   return (
     <>
       <group position={[0, 0, 3.5]}>
-        <RigidBody position={[-.5, 0, 0]} rotation-y={.2}  >
-          <Text3D {...fontProps}>
-            T
-            <meshBasicMaterial color="#ffd" />
-          </Text3D>
-        </RigidBody>
-        <RigidBody position={[-.3, 0, 0]} rotation-y={0.2} >
+        
+        
+         
+
+          <RigidBody position={[-0.5, 0, 0]} rotation-y={0.2} ref={testRef}>
+            <Text3D {...fontProps}  onClick={pushIt}>
+              T
+              <meshBasicMaterial color="#ffd" />
+            </Text3D>
+          </RigidBody>
+         
+          
+
+        <RigidBody position={[-0.3, 0, 0]} rotation-y={0.2}>
           <Text3D {...fontProps}>
             o
             <meshBasicMaterial color="#ffd" />
           </Text3D>
         </RigidBody>
-        <RigidBody position={[-.05, 0, 0]} rotation-y={-0.1} >
+
+        <RigidBody position={[-0.05, 0, 0]} rotation-y={-0.1}>
           <Text3D {...fontProps}>
             S
             <meshBasicMaterial color="#ffd" />
           </Text3D>
         </RigidBody>
-        <RigidBody position={[.25, 0, 0]} rotation-y={0} >
+
+        <RigidBody position={[0.25, 0, 0]} rotation-y={0}>
           <Text3D {...fontProps}>
             o
             <meshBasicMaterial color="#ffd" />
           </Text3D>
         </RigidBody>
 
-        <RigidBody position={[.2,.6,0]} rotation={[0,0,-0.3]} gravityScale={.04}>
+        <RigidBody position={[0.2, 0.6, 0]} rotation={[0, 0, -0.3]} gravityScale={0.04}>
           <Text3D {...fontProps} size={0.1} bevelThickness={0.01}>
             CREATIVE DEV
             <meshBasicMaterial color="#ffd" />
           </Text3D>
         </RigidBody>
+
       </group>
 
-    
-
-      
-    
-    
     </>
   );
 }
