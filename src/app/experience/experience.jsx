@@ -1,6 +1,6 @@
 import { Suspense, useEffect, useState, useRef, useLayoutEffect } from "react";
 import gsap from "gsap";
-import { useGLTF, useAnimations, OrbitControls, Sky, PositionalAudio, Sparkles, useProgress, Html } from "@react-three/drei";
+import { useGLTF, useAnimations, OrbitControls, Sky, PositionalAudio, Sparkles, useProgress, Html, PerspectiveCamera } from "@react-three/drei";
 import { Perf } from "r3f-perf";
 import { useFrame, Canvas } from "@react-three/fiber";
 import Text from "../Text/Text";
@@ -10,6 +10,7 @@ import { Model } from "../Model/Model";
 function Three({ setReady }) {
   const [dayTime, setDayTime] = useState(true);
   const tl = useRef();
+  const cameraRef = useRef();
   const skyRef = useRef();
   const sparklesRef = useRef();
   const garden = useGLTF("/garden3.glb");
@@ -17,6 +18,7 @@ function Three({ setReady }) {
   const nightAudio = useRef();
 
   useEffect(() => {
+    
     dayAudio.current.play();
     setReady(true);
     const ctx = gsap.context((context) => {
@@ -65,6 +67,15 @@ function Three({ setReady }) {
     tl.current.reversed(dayTime);
   }, [dayTime]);
   
+  useFrame((state,delta)=>{
+
+   const angel = state.clock.elapsedTime * .01
+
+  // cameraRef.current.lookAt(0,0,0)
+  // cameraRef.current.position.x = Math.sin(angel) * 10
+  // cameraRef.current.position.z = Math.cos(angel) * 10
+
+  })
 
   return (
     <>
@@ -90,9 +101,10 @@ function Three({ setReady }) {
       <ambientLight intensity={3}  />
       <PositionalAudio loop url="/day.mp3" distance={3} ref={dayAudio} />
       <PositionalAudio loop url="/night.mp3" distance={3} ref={nightAudio} />
-      <Sparkles ref={sparklesRef} scale={2} size={2} color={"gold"} />
-      <OrbitControls />
-      {/* <OrbitControls enableZoom={false} enablePan={false} minPolarAngle={Math.PI / 2} maxPolarAngle={Math.PI / 2} /> */}
+      <Sparkles ref={sparklesRef} scale={4} size={3} color={"gold"} />
+ 
+     <PerspectiveCamera makeDefault   near={.1} far={50} position={[0,2,10]} rotation-x={-.1} ref={cameraRef} />
+
       <Sky
         ref={skyRef}
         sunPosition={[-0.8, 0.3, -0.5]} // 1,0,0 for dark
@@ -114,9 +126,10 @@ function Three({ setReady }) {
 
 export default function Experience({ setReady }) {
   return (
-    <Canvas  camera={{ fov: 60, near: 0.1, far: 50 , }}>
+    // <Canvas  camera={{ fov: 60, near: 0.1, far: 50 ,position:[0,1,9] }}>
+    <Canvas>
       <Suspense>
-        <Physics gravity={[0, -10, 0]} >
+        <Physics gravity={[0, -10, 0]} debug>
           <Three setReady={setReady} />
         </Physics>
       </Suspense>

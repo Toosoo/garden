@@ -13,9 +13,9 @@ export default function Text() {
     posY: 0.3,
     posZ: -0.5,
   });
-
+  
   const fontProps = {
-    font: "./fonts/Oswald_Regular.json",
+    font: "/src/assets/fonts/Oswald_Regular.json",
     bevelEnabled: true,
     bevelSize: 0,
     bevelThickness: 0.05,
@@ -29,7 +29,7 @@ export default function Text() {
 
   return (
     <>
-      <group position={[0, 0, 3.2]}>
+      <group position={[0, 0, 4.2]}>
         <RigidBody position={[-.4, 0, 0]} rotation-y={.2}>
           <Text3D {...fontProps}>
             T
@@ -58,15 +58,15 @@ export default function Text() {
 
     
 
-      <group position={[0, 0, 2.2]} rotation-y={.1}>
+      <group position={[0, 0, 3.5]} rotation-y={.1}>
         <RigidBody position={[0, 0, 1]}>
-          <Text3D {...fontProps} size={0.1} bevelThickness={0.02}>
+          <Text3D {...fontProps} size={0.1} bevelThickness={0.01}>
             CREATIVE
             <meshBasicMaterial color="#ffd" />
           </Text3D>
         </RigidBody>
         <RigidBody position={[0.6, 0, 1]}>
-          <Text3D {...fontProps} size={0.1} bevelThickness={0.02}>
+          <Text3D {...fontProps} size={0.1} bevelThickness={0.01}>
             DEV
             <meshBasicMaterial color="#ffd" />
           </Text3D>
@@ -76,7 +76,7 @@ export default function Text() {
     
       <RigidBody type="fixed">
         <CuboidCollider args={[10, 10, 0.5]} position={[0, -1.4, 0]} rotation={[Math.PI * 0.5, 0, 0]} />
-      </RigidBody>
+      </RigidBody> 
     </>
   );
 }
