@@ -114,22 +114,22 @@ function Three({ setReady }) {
      
 
       <group position={[0, -1, 0]}>
-        {/* <primitive object={garden.scene} scale={0.04} /> */}
-
         <Model/>
       </group>
-    
+      <group position={[0, -.9, 0]}>
+
       <Text />
+      </group>
+    
     </>
   );
 }
 
 export default function Experience({ setReady }) {
   return (
-    // <Canvas  camera={{ fov: 60, near: 0.1, far: 50 ,position:[0,1,9] }}>
     <Canvas>
       <Suspense>
-        <Physics gravity={[0, -10, 0]} debug>
+        <Physics >
           <Three setReady={setReady} />
         </Physics>
       </Suspense>

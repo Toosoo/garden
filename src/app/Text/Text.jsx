@@ -1,5 +1,5 @@
 import { Center, Float, Text3D } from "@react-three/drei";
-import { RigidBody, Physics, CuboidCollider } from "@react-three/rapier";
+import { RigidBody, Physics, CuboidCollider, TrimeshCollider } from "@react-three/rapier";
 import { useControls } from "leva";
 
 export default function Text() {
@@ -24,59 +24,50 @@ export default function Text() {
     bevelSegments: 1,
     height: 0.01,
     letterSpacing: 0.01,
-    size: 0.4,
+    size: 0.5,
   };
 
   return (
     <>
-      <group position={[0, 0, 4.2]}>
-        <RigidBody position={[-.4, 0, 0]} rotation-y={.2}>
+      <group position={[0, 0, 3.5]}>
+        <RigidBody position={[-.5, 0, 0]} rotation-y={.2}  >
           <Text3D {...fontProps}>
             T
             <meshBasicMaterial color="#ffd" />
           </Text3D>
         </RigidBody>
-        <RigidBody position={[-.25, 0, -.2]} rotation-y={0.2}>
+        <RigidBody position={[-.3, 0, 0]} rotation-y={0.2} >
           <Text3D {...fontProps}>
             o
             <meshBasicMaterial color="#ffd" />
           </Text3D>
         </RigidBody>
-        <RigidBody position={[-.05, 0, -.4]} rotation-y={-0.1}>
+        <RigidBody position={[-.05, 0, 0]} rotation-y={-0.1} >
           <Text3D {...fontProps}>
             S
             <meshBasicMaterial color="#ffd" />
           </Text3D>
         </RigidBody>
-        <RigidBody position={[.25, 0, -.6]} rotation-y={-0.2}>
+        <RigidBody position={[.25, 0, 0]} rotation-y={0} >
           <Text3D {...fontProps}>
             o
             <meshBasicMaterial color="#ffd" />
           </Text3D>
         </RigidBody>
-      </group>
 
-    
-
-      <group position={[0, 0, 3.5]} rotation-y={.1}>
-        <RigidBody position={[0, 0, 1]}>
+        <RigidBody position={[.2,.6,0]} rotation={[0,0,-0.3]} gravityScale={.04}>
           <Text3D {...fontProps} size={0.1} bevelThickness={0.01}>
-            CREATIVE
-            <meshBasicMaterial color="#ffd" />
-          </Text3D>
-        </RigidBody>
-        <RigidBody position={[0.6, 0, 1]}>
-          <Text3D {...fontProps} size={0.1} bevelThickness={0.01}>
-            DEV
+            CREATIVE DEV
             <meshBasicMaterial color="#ffd" />
           </Text3D>
         </RigidBody>
       </group>
 
     
-      <RigidBody type="fixed">
-        <CuboidCollider args={[10, 10, 0.5]} position={[0, -1.4, 0]} rotation={[Math.PI * 0.5, 0, 0]} />
-      </RigidBody> 
+
+      
+    
+    
     </>
   );
 }

@@ -4,11 +4,8 @@ import { RigidBody } from "@react-three/rapier";
 
 export function Model(props) {
   const group = useRef();
-  const { nodes, materials, animations } = useGLTF("/garden3.glb");
-  const { actions } = useAnimations(animations, group);
-  useEffect(() => {
-    actions["Take 001"].play();
-  }, []);
+  const { nodes, materials } = useGLTF("/garden3.glb");
+
   return (
     <group ref={group} {...props} dispose={null} scale={0.07} rotation-y={Math.PI * .5}>
       <group name="Scene">
@@ -41,16 +38,17 @@ export function Model(props) {
             />
           </group>
   
-
-          <group name="C��rculo003" position={[52.939, 43.245, -0.003]} rotation={[-Math.PI / 2, 0, 0]} scale={[12682.225, 12682.216, 12682.216]}>
+        <group name="C��rculo003" position={[52.939, 43.245, -0.003]} rotation={[-Math.PI / 2, 0, 0]} scale={[12682.225, 12682.216, 12682.216]}>
+          <RigidBody type="fixed" colliders='trimesh'>
             <mesh
               name="C��rculo003_Material011_0"
               geometry={nodes["C��rculo003_Material011_0"].geometry}
               material={materials["Material.011"]}
               scale={1.011}
               />
+        </RigidBody>
           </group>
-        
+
         </group>
         
         <group name="boy" position={[0.49, 3.61, 7.31]} rotation={[-Math.PI / 2, 0, 0.227]}>
