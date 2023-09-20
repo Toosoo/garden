@@ -18,7 +18,6 @@ function Three({ setReady }) {
   const nightAudio = useRef();
 
   useEffect(() => {
-    
     dayAudio.current.play();
     setReady(true);
     const ctx = gsap.context((context) => {
@@ -66,16 +65,14 @@ function Three({ setReady }) {
   useEffect(() => {
     tl.current.reversed(dayTime);
   }, [dayTime]);
-  
-  useFrame((state,delta)=>{
 
-   const angel = state.clock.elapsedTime * .01
+  useFrame((state, delta) => {
+    const angel = state.clock.elapsedTime * 0.01;
 
-  // cameraRef.current.lookAt(0,0,0)
-  // cameraRef.current.position.x = Math.sin(angel) * 10
-  // cameraRef.current.position.z = Math.cos(angel) * 10
-
-  })
+    // cameraRef.current.lookAt(0,0,0)
+    // cameraRef.current.position.x = Math.sin(angel) * 10
+    // cameraRef.current.position.z = Math.cos(angel) * 10
+  });
 
   return (
     <>
@@ -98,12 +95,12 @@ function Three({ setReady }) {
       </Html>
 
       <Perf position="top-left" />
-      <ambientLight intensity={3}  />
+      <ambientLight intensity={3} />
       <PositionalAudio loop url="/day.mp3" distance={3} ref={dayAudio} />
       <PositionalAudio loop url="/night.mp3" distance={3} ref={nightAudio} />
       <Sparkles ref={sparklesRef} scale={4} size={3} color={"gold"} />
- 
-     <PerspectiveCamera makeDefault   near={.1} far={50} position={[0,2,10]} rotation-x={-.1} ref={cameraRef} />
+
+      <PerspectiveCamera makeDefault near={0.1} far={50} position={[0, 2, 10]} rotation-x={-0.1} ref={cameraRef} />
 
       <Sky
         ref={skyRef}
@@ -111,16 +108,13 @@ function Three({ setReady }) {
         turbidity={10} // 60 for dark
         mieCoefficient={0.005} // .05 for dark
       />
-     
 
       <group position={[0, -1, 0]}>
-        <Model/>
+        <Model />
       </group>
-      <group position={[0, -.9, 0]}>
-
-      <Text />
+      <group position={[0, -0.9, 0]}>
+        <Text />
       </group>
-    
     </>
   );
 }
@@ -128,11 +122,9 @@ function Three({ setReady }) {
 export default function Experience({ setReady }) {
   return (
     <Canvas>
-      <Suspense>
-        <Physics >
-          <Three setReady={setReady} />
-        </Physics>
-      </Suspense>
+      <Physics>
+        <Three setReady={setReady} />
+      </Physics>
     </Canvas>
   );
 }
