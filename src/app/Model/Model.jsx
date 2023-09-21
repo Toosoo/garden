@@ -53,10 +53,10 @@ export function Model(props) {
         
         <group name="boy" position={[0.49, 3.61, 7.31]} rotation={[-Math.PI / 2, 0, 0.227]}>
           <mesh name="Object_2001" geometry={nodes.Object_2001.geometry}>
-            <meshNormalMaterial color="#ddd" />
+            <meshStandardMaterial color="#ddd" />
           </mesh>
           <mesh name="Object_3" geometry={nodes.Object_3.geometry}>
-            <meshPhongMaterial color="#fff" />
+            <meshStandardMaterial color="#fff" />
           </mesh>
         </group>
       </group>

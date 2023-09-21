@@ -1,6 +1,6 @@
 import { Suspense, useEffect, useState, useRef, useLayoutEffect } from "react";
 import gsap from "gsap";
-import { useGLTF, useAnimations, OrbitControls, Sky, PositionalAudio, Sparkles, useProgress, Html, PerspectiveCamera } from "@react-three/drei";
+import { useGLTF, useAnimations, OrbitControls, Sky, PositionalAudio, Sparkles, useProgress, Html, PerspectiveCamera, Environment } from "@react-three/drei";
 import { Perf } from "r3f-perf";
 import { useFrame, Canvas } from "@react-three/fiber";
 import Text from "../Text/Text";
@@ -69,9 +69,6 @@ function Three({ setReady }) {
   useFrame((state, delta) => {
     const angel = state.clock.elapsedTime * 0.01;
 
-    // cameraRef.current.lookAt(0,0,0)
-    // cameraRef.current.position.x = Math.sin(angel) * 10
-    // cameraRef.current.position.z = Math.cos(angel) * 10
   });
 
   return (
@@ -93,14 +90,14 @@ function Three({ setReady }) {
           <span className="dot absolute left-[4%] w-10 h-10 rounded-full bg-black z-[-1]  shadow-md"></span>
         </button>
       </Html>
-
+      <Environment preset="city"/>
       <Perf position="top-left" />
-      <ambientLight intensity={3} />
+     
+      <OrbitControls makeDefault minDistance={6} maxDistance={7} autoRotate={false} minPolarAngle={1.5} maxPolarAngle={1.5} />
+
       <PositionalAudio loop url="/day.mp3" distance={3} ref={dayAudio} />
       <PositionalAudio loop url="/night.mp3" distance={3} ref={nightAudio} />
       <Sparkles ref={sparklesRef} scale={4} size={3} color={"gold"} />
-
-      <PerspectiveCamera makeDefault near={0.1} far={50} position={[0, 2, 10]} rotation-x={-0.1} ref={cameraRef} />
 
       <Sky
         ref={skyRef}
@@ -121,8 +118,8 @@ function Three({ setReady }) {
 
 export default function Experience({ setReady }) {
   return (
-    <Canvas>
-      <Physics debug>
+    <Canvas camera={{near:.1,far:50,position:[0, 0, 7],rotation:[0,0,0]}}>
+      <Physics>
         <Three setReady={setReady} />
       </Physics>
     </Canvas>
