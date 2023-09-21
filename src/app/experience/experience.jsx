@@ -1,13 +1,13 @@
 import { Suspense, useEffect, useState, useRef, useLayoutEffect } from "react";
 import gsap from "gsap";
-import { useGLTF, useAnimations, OrbitControls, Sky, PositionalAudio, Sparkles, useProgress, Html, PerspectiveCamera, Environment } from "@react-three/drei";
+import { useGLTF, OrbitControls, Sky, PositionalAudio, Sparkles, Html } from "@react-three/drei";
 import { Perf } from "r3f-perf";
 import { useFrame, Canvas } from "@react-three/fiber";
 import Text from "../Text/Text";
 import { Physics, RigidBody } from "@react-three/rapier";
-import { Model } from "../Model/Model";
 import { Tree } from "../Model/Tree";
 import { Boy } from "../Model/Boy";
+import { Grass } from "../Model/Grass";
 
 
 
@@ -109,6 +109,7 @@ function Three({ setReady }) {
       <group position={[0, -1, 0]}>
         <Tree/>
         <Boy />
+        <Grass/>
       </group>
       <group position={[0, -0.9, 0]}>
         <Text />
