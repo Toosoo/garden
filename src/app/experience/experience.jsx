@@ -7,6 +7,8 @@ import Text from "../Text/Text";
 import { Physics, RigidBody } from "@react-three/rapier";
 import { Model } from "../Model/Model";
 
+
+
 function Three({ setReady }) {
   const [dayTime, setDayTime] = useState(true);
   const tl = useRef();
@@ -66,10 +68,7 @@ function Three({ setReady }) {
     tl.current.reversed(dayTime);
   }, [dayTime]);
 
-  useFrame((state, delta) => {
-    const angel = state.clock.elapsedTime * 0.01;
 
-  });
 
   return (
     <>
@@ -90,9 +89,9 @@ function Three({ setReady }) {
           <span className="dot absolute left-[4%] w-10 h-10 rounded-full bg-black z-[-1]  shadow-md"></span>
         </button>
       </Html>
-      <Environment preset="city"/>
+      {/* <Environment preset="city"/> */}
       <Perf position="top-left" />
-     
+      <ambientLight intensity={2}/>
       <OrbitControls makeDefault minDistance={6} maxDistance={7} autoRotate={false} minPolarAngle={1.5} maxPolarAngle={1.5} />
 
       <PositionalAudio loop url="/day.mp3" distance={3} ref={dayAudio} />
@@ -105,13 +104,13 @@ function Three({ setReady }) {
         turbidity={10} // 60 for dark
         mieCoefficient={0.005} // .05 for dark
       />
-
+      
       <group position={[0, -1, 0]}>
         <Model />
       </group>
       <group position={[0, -0.9, 0]}>
         <Text />
-      </group>
+      </group> 
     </>
   );
 }

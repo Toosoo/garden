@@ -1,19 +1,13 @@
-import { Float, Text3D } from "@react-three/drei";
+import { Float, Instance, Instances, Text3D, useMatcapTexture } from "@react-three/drei";
 import { RigidBody, Physics } from "@react-three/rapier";
 import { useControls } from "leva";
 import { useRef } from "react";
 
 export default function Text() {
-  const { posX, posY, posZ, rayleigh, turbidity, mieDirectionalG, mieCoefficient, rayColor } = useControls({
-    rayleigh: 0.5,
-    turbidity: 10,
-    mieDirectionalG: 0.8,
-    mieCoefficient: 0.05,
-    rayColor: "#fff",
-    posX: -0.8,
-    posY: 0.3,
-    posZ: -0.5,
-  });
+  
+const [matcap,url] = useMatcapTexture('5ECBA4_BCFAE7_92EED0_A1F4DC',64)
+
+
 
   const fontProps = {
     font: "/src/assets/fonts/Oswald_Regular.json",
@@ -35,13 +29,14 @@ export default function Text() {
 
   return (
     <>
+
       <group position={[0, 0, 3.5]}>
        
 
         <RigidBody position={[-0.5, 0, 0]} rotation-y={0.2} ref={testRef}>
-          <Text3D {...fontProps} onClick={pushIt}>
+          <Text3D {...fontProps} onClick={pushIt} >
             T
-            <meshNormalMaterial/>
+            <meshMatcapMaterial matcap={matcap} />
           </Text3D>
         </RigidBody>
         
@@ -49,28 +44,28 @@ export default function Text() {
         <RigidBody position={[-0.3, 0, 0]} rotation-y={0.2}>
           <Text3D {...fontProps} receiveShadow>
             o
-            <meshNormalMaterial/>
+            <meshMatcapMaterial matcap={matcap} />
           </Text3D>
         </RigidBody>
 
         <RigidBody position={[-0.05, 0, 0]} rotation-y={-0.1}>
           <Text3D {...fontProps} receiveShadow>
             S
-            <meshNormalMaterial/>
+            <meshMatcapMaterial matcap={matcap} />
           </Text3D>
         </RigidBody>
 
         <RigidBody position={[0.25, 0, 0]} rotation-y={0}>
           <Text3D {...fontProps}>
             o
-            <meshNormalMaterial color={rayColor} />
+            <meshMatcapMaterial matcap={matcap} />
           </Text3D>
         </RigidBody>
 
         <RigidBody position={[0.2, 0.6, 0]} rotation={[0, 0, -0.3]} gravityScale={0.04}>
           <Text3D {...fontProps} size={0.1} bevelThickness={0.01} receiveShadow>
             CREATIVE DEV
-            <meshBasicMaterial color="#ffd" />
+            <meshMatcapMaterial matcap={matcap} />
           </Text3D>
         </RigidBody>
 
