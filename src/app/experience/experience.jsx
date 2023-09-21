@@ -17,7 +17,6 @@ function Three({ setReady }) {
   const cameraRef = useRef();
   const skyRef = useRef();
   const sparklesRef = useRef();
-  const garden = useGLTF("/garden3.glb");
   const dayAudio = useRef();
   const nightAudio = useRef();
 
@@ -129,4 +128,4 @@ export default function Experience({ setReady }) {
   );
 }
 
-useGLTF.preload("/garden3.glb");
+
