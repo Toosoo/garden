@@ -10,7 +10,7 @@ const [matcap,url] = useMatcapTexture('2E763A_78A0B7_B3D1CF_14F209',64)
 
 
   const fontProps = {
-    font: "/src/assets/fonts/Oswald_Regular.json",
+    font: "/fonts/Oswald_Regular.json",
     bevelEnabled: true,
     bevelSize: 0,
     bevelThickness: 0.05,
@@ -42,14 +42,14 @@ const [matcap,url] = useMatcapTexture('2E763A_78A0B7_B3D1CF_14F209',64)
         
 
         <RigidBody position={[-0.3, 0, 0]} rotation-y={0.2}>
-          <Text3D {...fontProps} receiveShadow>
+          <Text3D {...fontProps} >
             o
             <meshMatcapMaterial matcap={matcap} />
           </Text3D>
         </RigidBody>
 
         <RigidBody position={[-0.05, 0, 0]} rotation-y={-0.1}>
-          <Text3D {...fontProps} receiveShadow>
+          <Text3D {...fontProps} >
             S
             <meshMatcapMaterial matcap={matcap} />
           </Text3D>
@@ -63,7 +63,7 @@ const [matcap,url] = useMatcapTexture('2E763A_78A0B7_B3D1CF_14F209',64)
         </RigidBody>
 
         <RigidBody position={[0.2, 0.6, 0]} rotation={[0, 0, -0.3]} gravityScale={0.04}>
-          <Text3D {...fontProps} size={0.1} bevelThickness={0.01} receiveShadow>
+          <Text3D {...fontProps} size={0.1} bevelThickness={0.01}>
             CREATIVE DEV
             <meshMatcapMaterial matcap={matcap} />
           </Text3D>
