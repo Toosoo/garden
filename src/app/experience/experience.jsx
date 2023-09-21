@@ -6,6 +6,8 @@ import { useFrame, Canvas } from "@react-three/fiber";
 import Text from "../Text/Text";
 import { Physics, RigidBody } from "@react-three/rapier";
 import { Model } from "../Model/Model";
+import { Tree } from "../Model/Tree";
+import { Boy } from "../Model/Boy";
 
 
 
@@ -89,10 +91,9 @@ function Three({ setReady }) {
           <span className="dot absolute left-[4%] w-10 h-10 rounded-full bg-black z-[-1]  shadow-md"></span>
         </button>
       </Html>
-      {/* <Environment preset="city"/> */}
       <Perf position="top-left" />
       <ambientLight intensity={2}/>
-      <OrbitControls makeDefault minDistance={6} maxDistance={7} autoRotate={false} minPolarAngle={1.5} maxPolarAngle={1.5} />
+      <OrbitControls makeDefault minDistance={6} maxDistance={7} autoRotate={false} minPolarAngle={1.45} maxPolarAngle={1.45} />
 
       <PositionalAudio loop url="/day.mp3" distance={3} ref={dayAudio} />
       <PositionalAudio loop url="/night.mp3" distance={3} ref={nightAudio} />
@@ -106,7 +107,8 @@ function Three({ setReady }) {
       />
       
       <group position={[0, -1, 0]}>
-        <Model />
+        <Tree/>
+        <Boy />
       </group>
       <group position={[0, -0.9, 0]}>
         <Text />
@@ -119,6 +121,7 @@ export default function Experience({ setReady }) {
   return (
     <Canvas camera={{near:.1,far:50,position:[0, 0, 7],rotation:[0,0,0]}}>
       <Physics>
+        
         <Three setReady={setReady} />
       </Physics>
     </Canvas>

@@ -5,7 +5,7 @@ import { useRef } from "react";
 
 export default function Text() {
   
-const [matcap,url] = useMatcapTexture('5ECBA4_BCFAE7_92EED0_A1F4DC',64)
+const [matcap,url] = useMatcapTexture('2E763A_78A0B7_B3D1CF_14F209',64)
 
 
 
