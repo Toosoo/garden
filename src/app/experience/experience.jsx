@@ -5,11 +5,12 @@ import { Perf } from "r3f-perf";
 import { useFrame, Canvas } from "@react-three/fiber";
 import Text from "../Text/Text";
 import { Physics, RigidBody } from "@react-three/rapier";
-import { Tree } from "../models/Tree";
-import { Boy } from "../models/Boy";
+
 import { Grass } from "../models/Grass";
 import { Insta } from "../Models/Insta";
 import { Email } from "../Models/Email";
+import { Tree } from "../Models/Tree";
+import { Boy } from "../Models/Boy";
 
 function Three({ setReady }) {
   const [dayTime, setDayTime] = useState(true);
