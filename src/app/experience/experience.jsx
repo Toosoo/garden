@@ -91,12 +91,12 @@ function Three({ setReady }) {
         </button>
       </Html>
       <Perf position="top-left" />
-      <ambientLight intensity={2}/>
+     
       <OrbitControls makeDefault minDistance={6} maxDistance={7} autoRotate={false} minPolarAngle={1.45} maxPolarAngle={1.45} />
 
       <PositionalAudio loop url="/day.mp3" distance={3} ref={dayAudio} />
       <PositionalAudio loop url="/night.mp3" distance={3} ref={nightAudio} />
-      <Sparkles ref={sparklesRef} scale={4} size={3} color={"gold"} />
+      <Sparkles ref={sparklesRef} scale={5} size={3} color={"gold"} position={[0,1,0]} />
 
       <Sky
         ref={skyRef}
@@ -105,12 +105,12 @@ function Three({ setReady }) {
         mieCoefficient={0.005} // .05 for dark
       />
       
-      <group position={[0, -1, 0]}>
+      <group position={[0, -1.4, 0]}>
         <Tree/>
         <Boy />
         <Grass/>
       </group>
-      <group position={[0, -0.9, 0]}>
+      <group position={[0, -1.3, 0]}>
         <Text />
       </group> 
     </>

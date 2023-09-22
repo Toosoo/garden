@@ -1,13 +1,10 @@
 import { Float, Instance, Instances, Text3D, useMatcapTexture } from "@react-three/drei";
 import { RigidBody, Physics } from "@react-three/rapier";
 import { useControls } from "leva";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 
 export default function Text() {
-  
-const [matcap,url] = useMatcapTexture('2E763A_78A0B7_B3D1CF_14F209',64)
-
-
+  const [matcap, url] = useMatcapTexture("2E763A_78A0B7_B3D1CF_14F209", 64);
 
   const fontProps = {
     font: "/fonts/Oswald_Regular.json",
@@ -26,30 +23,31 @@ const [matcap,url] = useMatcapTexture('2E763A_78A0B7_B3D1CF_14F209',64)
     console.log(testRef.current);
     testRef.current.applyImpulse({ x: 0, y: 0.1, z: -0.05 });
   };
+  
+  useEffect(()=>{
+
+
+  },[])
 
   return (
     <>
-
       <group position={[0, 0, 3.5]}>
-       
-
         <RigidBody position={[-0.5, 0, 0]} rotation-y={0.2} ref={testRef}>
-          <Text3D {...fontProps} onClick={pushIt} >
+          <Text3D {...fontProps} onClick={pushIt}>
             T
             <meshMatcapMaterial matcap={matcap} />
           </Text3D>
         </RigidBody>
-        
 
         <RigidBody position={[-0.3, 0, 0]} rotation-y={0.2}>
-          <Text3D {...fontProps} >
+          <Text3D {...fontProps}>
             o
             <meshMatcapMaterial matcap={matcap} />
           </Text3D>
         </RigidBody>
 
         <RigidBody position={[-0.05, 0, 0]} rotation-y={-0.1}>
-          <Text3D {...fontProps} >
+          <Text3D {...fontProps}>
             S
             <meshMatcapMaterial matcap={matcap} />
           </Text3D>
@@ -68,7 +66,6 @@ const [matcap,url] = useMatcapTexture('2E763A_78A0B7_B3D1CF_14F209',64)
             <meshMatcapMaterial matcap={matcap} />
           </Text3D>
         </RigidBody>
-
       </group>
     </>
   );
