@@ -5,11 +5,11 @@ import { Perf } from "r3f-perf";
 import { useFrame, Canvas } from "@react-three/fiber";
 import Text from "../Text/Text";
 import { Physics, RigidBody } from "@react-three/rapier";
-import { Tree } from "../Model/Tree";
-import { Boy } from "../Model/Boy";
-import { Grass } from "../Model/Grass";
-
-
+import { Tree } from "../models/Tree";
+import { Boy } from "../models/Boy";
+import { Grass } from "../models/Grass";
+import { Insta } from "../Models/Insta";
+import { Email } from "../Models/Email";
 
 function Three({ setReady }) {
   const [dayTime, setDayTime] = useState(true);
@@ -69,8 +69,6 @@ function Three({ setReady }) {
     tl.current.reversed(dayTime);
   }, [dayTime]);
 
-
-
   return (
     <>
       <Html wrapperClass="switch">
@@ -91,12 +89,12 @@ function Three({ setReady }) {
         </button>
       </Html>
       <Perf position="top-left" />
-     
+
       <OrbitControls makeDefault minDistance={6} maxDistance={7} autoRotate={false} minPolarAngle={1.45} maxPolarAngle={1.45} />
 
       <PositionalAudio loop url="/day.mp3" distance={3} ref={dayAudio} />
       <PositionalAudio loop url="/night.mp3" distance={3} ref={nightAudio} />
-      <Sparkles ref={sparklesRef} scale={5} size={3} color={"gold"} position={[0,1,0]} />
+      <Sparkles ref={sparklesRef} scale={5} size={3} color={"gold"} position={[0, 1, 0]} />
 
       <Sky
         ref={skyRef}
@@ -104,28 +102,31 @@ function Three({ setReady }) {
         turbidity={10} // 60 for dark
         mieCoefficient={0.005} // .05 for dark
       />
-      
+
       <group position={[0, -1.4, 0]}>
-        <Tree/>
+        <Tree />
         <Boy />
-        <Grass/>
+        <Grass />
       </group>
+
+      <group position={[-3.5,-.5,0]} rotation={[0,Math.PI /2,0]}>
+        <Insta/>
+        <Email/>
+      </group>
+
       <group position={[0, -1.3, 0]}>
         <Text />
-      </group> 
+      </group>
     </>
   );
 }
 
 export default function Experience({ setReady }) {
   return (
-    <Canvas camera={{near:.1,far:50,position:[0, 0, 7],rotation:[0,0,0]}}>
+    <Canvas camera={{ near: 0.1, far: 50, position: [0, 0, 7], rotation: [0, 0, 0] }}>
       <Physics>
-        
         <Three setReady={setReady} />
       </Physics>
     </Canvas>
   );
 }
-
-
