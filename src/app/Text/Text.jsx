@@ -1,6 +1,5 @@
-import { Float, Instance, Instances, Text3D, useMatcapTexture } from "@react-three/drei";
-import { RigidBody, Physics } from "@react-three/rapier";
-import { useControls } from "leva";
+import { Text3D, useMatcapTexture } from "@react-three/drei";
+import { RigidBody} from "@react-three/rapier";
 import { useEffect, useRef } from "react";
 
 export default function Text() {
@@ -23,7 +22,7 @@ export default function Text() {
     console.log(testRef.current);
     testRef.current.applyImpulse({ x: 0, y: 0.1, z: -0.05 });
   };
-  
+
   useEffect(()=>{
 
 

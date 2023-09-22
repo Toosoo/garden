@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+
 import { useGLTF, useMatcapTexture } from "@react-three/drei";
 
 export function Tree(props) {

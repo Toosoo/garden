@@ -1,4 +1,4 @@
-import { Suspense, lazy, useEffect, useState } from "react";
+import { Suspense,  useState } from "react";
 import "./App.css";
 import Experience from "./app/experience/experience";
 import Intro from "./app/Intro/Intro";
