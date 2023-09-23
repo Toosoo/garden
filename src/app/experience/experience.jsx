@@ -1,6 +1,6 @@
 import { Suspense, useEffect, useState, useRef } from "react";
 import gsap from "gsap";
-import { useGLTF, OrbitControls, Sky, Sparkles, Html } from "@react-three/drei";
+import { useGLTF, OrbitControls, Sky, Sparkles, Html, KeyboardControls } from "@react-three/drei";
 import { Perf } from "r3f-perf";
 import { useFrame, Canvas } from "@react-three/fiber";
 import Text from "../Text/Text";
@@ -12,6 +12,7 @@ import { Insta } from "../Models/Insta";
 import { Email } from "../Models/Email";
 import { Tree } from "../Models/Tree";
 import { Boy } from "../Models/Boy";
+import Ball from "../Ball/Ball";
 
 function Three({ ready, setReady, start }) {
   const [dayTime, setDayTime] = useState(true);
@@ -148,22 +149,37 @@ function Three({ ready, setReady, start }) {
         <Grass />
       </group>
 
-      <group position={[-3.5, -0.5, 0]} rotation={[0, Math.PI / 2, 0]}>
+      {/* <group position={[-3.5, -0.5, 0]} rotation={[0, Math.PI / 2, 0]}>
         <Insta />
         <Email />
-      </group>
+      </group> */}
 
-      <group position={[0, -1.3, 0]}>{/* <Text /> */}</group>
+
+      <Ball/>
+     
+
+      {/* <group position={[0, -1.3, 0]}> <Text /> </group> */}
     </>
   );
 }
 
 export default function Experience({ ready, setReady, start }) {
   return (
+    <KeyboardControls 
+    map={[
+        {name:'forward',keys:['ArrowUp','KeyW']},
+        {name:'backward',keys:['ArrowDown','KeyS']},
+        {name:'leftward',keys:['ArrowLeft','KeyA']},
+        {name:'rightward',keys:['ArrowRight','KeyD']},
+        {name:'jump',keys:['Space']},
+    ]}
+    >
+
     <Canvas camera={{ near: 0.1, far: 50, position: [0, 0, 7], rotation: [0, 0, 0] }}>
       <Physics>
         <Three setReady={setReady} ready={ready} start={start} />
       </Physics>
     </Canvas>
+    </KeyboardControls>
   );
 }
