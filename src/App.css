@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -7,7 +7,6 @@ body {
   position: relative;
   width: 100%;
   min-height: 100vh;
-  font-family: "Inter", sans-serif;
 }
 #root,
 canvas {
@@ -19,7 +18,8 @@ canvas {
   left: 50% !important;
   display: flex;
   justify-content: center;
-  z-index:10 !important
+  z-index:10 !important;
+  width:100%
 }
 
 .switch .dot {
@@ -28,3 +28,4 @@ canvas {
 .char {
   font-kerning: none;
 }
+
