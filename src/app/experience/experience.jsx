@@ -158,7 +158,7 @@ function Three({ ready, setReady, start }) {
       <Ball/>
      
 
-      {/* <group position={[0, -1.3, 0]}> <Text /> </group> */}
+      <group position={[0, -1.3, 0]}> <Text /> </group>
     </>
   );
 }
@@ -176,7 +176,7 @@ export default function Experience({ ready, setReady, start }) {
     >
 
     <Canvas camera={{ near: 0.1, far: 50, position: [0, 0, 7], rotation: [0, 0, 0] }}>
-      <Physics>
+      <Physics debug>
         <Three setReady={setReady} ready={ready} start={start} />
       </Physics>
     </Canvas>
