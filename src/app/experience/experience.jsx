@@ -17,7 +17,7 @@ import Ball from "../Ball/Ball";
 function Three({ ready, setReady, start }) {
   const [dayTime, setDayTime] = useState(true);
   const tl = useRef();
-  let musicTL = useRef()
+  let musicTL = useRef();
   const skyRef = useRef();
   const sparklesRef = useRef();
   const dotRef = useRef();
@@ -74,25 +74,27 @@ function Three({ ready, setReady, start }) {
     tl.current.reversed(dayTime);
   }, [dayTime]);
 
- 
-
   const soundSwitcher = () => {
     setMusic(!music);
     musicTL.kill();
     musicTL.to(".sound-charts path:nth-child(odd)", {
-      scale: .5,
+      scale: 0.5,
       stagger: 0.1,
       yoyo: true,
       repeat: -1,
-      transformOrigin:'center'
+      transformOrigin: "center",
     });
-    musicTL.to(".sound-charts path:nth-child(even)", {
-      scale: .5,
-      delay: 0.3,
-      yoyo: true,
-      repeat: -1,
-      transformOrigin:'center'
-    },'<');
+    musicTL.to(
+      ".sound-charts path:nth-child(even)",
+      {
+        scale: 0.5,
+        delay: 0.3,
+        yoyo: true,
+        repeat: -1,
+        transformOrigin: "center",
+      },
+      "<"
+    );
     console.log(music);
     if (music) {
       musicTL.play();
@@ -154,32 +156,28 @@ function Three({ ready, setReady, start }) {
         <Email />
       </group> */}
 
+      <Ball />
 
-      <Ball/>
-     
-
-      <group position={[0, -1.3, 0]}> <Text /> </group>
+      {/* <group position={[0, -1.3, 0]}> <Text /> </group> */}
     </>
   );
 }
 
 export default function Experience({ ready, setReady, start }) {
   return (
-    <KeyboardControls 
-    map={[
-        {name:'forward',keys:['ArrowUp','KeyW']},
-        {name:'backward',keys:['ArrowDown','KeyS']},
-        {name:'leftward',keys:['ArrowLeft','KeyA']},
-        {name:'rightward',keys:['ArrowRight','KeyD']},
-        {name:'jump',keys:['Space']},
-    ]}
-    >
-
-    <Canvas camera={{ near: 0.1, far: 50, position: [0, 0, 7], rotation: [0, 0, 0] }}>
-      <Physics debug>
-        <Three setReady={setReady} ready={ready} start={start} />
-      </Physics>
-    </Canvas>
+    <KeyboardControls
+      map={[
+        { name: "forward", keys: ["ArrowUp", "KeyW"] },
+        { name: "backward", keys: ["ArrowDown", "KeyS"] },
+        { name: "leftward", keys: ["ArrowLeft", "KeyA"] },
+        { name: "rightward", keys: ["ArrowRight", "KeyD"] },
+        { name: "jump", keys: ["Space"] },
+      ]}>
+      <Canvas camera={{ near: 0.1, far: 50, position: [0, 0, 7], rotation: [0, 0, 0] }}>
+        <Physics debug>
+          <Three setReady={setReady} ready={ready} start={start} />
+        </Physics>
+      </Canvas>
     </KeyboardControls>
   );
 }
