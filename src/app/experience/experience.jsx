@@ -174,7 +174,7 @@ export default function Experience({ ready, setReady, start }) {
         { name: "jump", keys: ["Space"] },
       ]}>
       <Canvas camera={{ near: 0.1, far: 50, position: [0, 0, 7], rotation: [0, 0, 0] }}>
-        <Physics debug>
+        <Physics>
           <Three setReady={setReady} ready={ready} start={start} />
         </Physics>
       </Canvas>
