@@ -12,7 +12,7 @@ export default function Ball() {
 
 
   const jump = () =>{
-        ball.current.applyImpulse({x:0,y:.5,z:0})
+        ball.current.applyImpulse({x:0,y:.2,z:0})
   }
 
 
@@ -33,8 +33,8 @@ export default function Ball() {
         const impulse = {x:0,y:0,z:0}
         const torque = {x:0,y:0,z:0}
 
-        const impulseStrength = .3 * delta
-        const torqueStrength = .3 * delta
+        const impulseStrength = .1 * delta
+        const torqueStrength = .1 * delta
 
         if(forward)
         {
@@ -69,16 +69,13 @@ return(
     <RigidBody 
     colliders='ball' 
     canSleep={false} 
-    restitution={.5} 
+    restitution={.9} 
     friction={1} 
     ref={ball} 
     linearDamping={.5}
     angularDamping={.5}
     >
-        <mesh scale={.3}>
-            {/* <icosahedronGeometry args={[1,1]} />
-            <meshStandardMaterial flatShading /> */}
-
+        <mesh scale={.2}>
             <sphereGeometry />
             <meshMatcapMaterial matcap={glassMatCap} />
         </mesh>
