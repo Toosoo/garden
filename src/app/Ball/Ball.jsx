@@ -12,9 +12,8 @@ export default function Ball() {
 
 
   const jump = () =>{
-        ball.current.applyImpulse({x:0,y:.2,z:0})
+        ball.current.applyImpulse({x:0,y:.1,z:0})
   }
-
 
   useEffect(()=>{
     subscribeKeys(
@@ -33,8 +32,8 @@ export default function Ball() {
         const impulse = {x:0,y:0,z:0}
         const torque = {x:0,y:0,z:0}
 
-        const impulseStrength = .1 * delta
-        const torqueStrength = .1 * delta
+        const impulseStrength = .05 * delta
+        const torqueStrength = .05 * delta
 
         if(forward)
         {
