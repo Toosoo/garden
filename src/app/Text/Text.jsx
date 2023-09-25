@@ -54,6 +54,12 @@ export default function Text() {
           <meshMatcapMaterial matcap={glassMatCap} />
         </Text3D>
       </RigidBody>
+      <RigidBody position={[-0.4, 0.5, .02]} rotation={[0, 0, 0]} gravityScale={0.01}>
+        <Text3D {...fontProps} size={0.07} bevelThickness={0.01}>
+          FREELANCE
+          <meshMatcapMaterial matcap={glassMatCap} />
+        </Text3D>
+      </RigidBody>
     </group>
   );
 }
