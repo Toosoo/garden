@@ -10,7 +10,7 @@ export function Grass(props) {
     <group {...props} dispose={null} scale={0.00035}>
       <RigidBody type="fixed" colliders='trimesh'>
       <mesh position={[0,-400,0]} material={materials.N00_000_Hair_00_HAIR_Instance}>
-        <cylinderGeometry args={[12400, 10000,1000,100]}/>
+        <cylinderGeometry args={[12400, 11300,1000,100]}/>
       </mesh>
       </RigidBody>  
         <mesh

@@ -154,13 +154,16 @@ function Three({ ready, setReady, start }) {
       <group position={[-3.5, -0.5, 0]} rotation={[0, Math.PI / 2, 0]}>
         <Insta />
         <Email />
-      </group> 
-      
-      <group position={[0,0,1]}>
-      <Ball />
       </group>
 
-      <group position={[0, -1.3, 0]}> <Text /> </group>
+      <group position={[0, 0, 1]}>
+        <Ball />
+      </group>
+
+      <group position={[0, -1.3, 0]}>
+        {" "}
+        <Text />{" "}
+      </group>
     </>
   );
 }
@@ -176,7 +179,7 @@ export default function Experience({ ready, setReady, start }) {
         { name: "jump", keys: ["Space"] },
       ]}>
       <Canvas camera={{ near: 0.1, far: 50, position: [0, 0, 7], rotation: [0, 0, 0] }}>
-        <Physics  >
+        <Physics>
           <Three setReady={setReady} ready={ready} start={start} />
         </Physics>
       </Canvas>

@@ -1,4 +1,4 @@
-import { Text3D, useMatcapTexture } from "@react-three/drei";
+import { Text3D, useMatcapTexture,Float } from "@react-three/drei";
 import { RigidBody } from "@react-three/rapier";
 import { useEffect, useRef } from "react";
 
@@ -16,16 +16,19 @@ export default function Text() {
     bevelSegments: 1,
     height: 0.01,
     letterSpacing: 0.01,
-    size: 0.5,
+    size: 0.6,
   };
 
   return (
-    <group position={[0, 0, 3.8]}>
-       <RigidBody position={[-0.6, 0, 0]} rotation-y={0.2}>
+    <group position={[0, 0, 3]}>
+
+       <RigidBody position={[-0.7, 0, 0]} rotation-y={0.2} >
+      <Float floatingRange={[.15, .2]} rotationIntensity={2}>
         <Text3D {...fontProps}>
           C
           <meshMatcapMaterial matcap={basicMatcap} />
         </Text3D>
+      </Float>
       </RigidBody>
 
       <RigidBody position={[-0.5, 0, 0]} rotation-y={0.2}>
@@ -35,40 +38,40 @@ export default function Text() {
         </Text3D>
       </RigidBody>
 
-      <RigidBody position={[-0.4, 0, 0]} rotation-y={-0.1}>
+      <RigidBody position={[-0.3, 0, 0]} rotation-y={-0.1}>
         <Text3D {...fontProps}>
           e
           <meshMatcapMaterial matcap={basicMatcap} />
         </Text3D>
       </RigidBody>
 
-      <RigidBody position={[-0.3, 0, 0]} rotation-y={0}>
+      <RigidBody position={[-0.15, 0, 0]} rotation-y={0}>
         <Text3D {...fontProps}>
           a
           <meshMatcapMaterial matcap={basicMatcap} />
         </Text3D>
       </RigidBody> 
 
-      <RigidBody position={[-0.2, 0, 0]} rotation-y={0}>
+      <RigidBody position={[-0.05, 0, 0]} rotation-y={0}>
         <Text3D {...fontProps}>
           T
           <meshMatcapMaterial matcap={basicMatcap} />
         </Text3D>
       </RigidBody> 
 
-      <RigidBody position={[0.1, 0, 0]} rotation-y={0}>
+      <RigidBody position={[0.2, 0, 0]} rotation-y={0}>
         <Text3D {...fontProps}>
           i
           <meshMatcapMaterial matcap={basicMatcap} />
         </Text3D>
       </RigidBody> 
-      <RigidBody position={[0.2, 0, 0]} rotation-y={0}>
+      <RigidBody position={[0.3, 0, 0]} rotation-y={0}>
         <Text3D {...fontProps}>
           V
           <meshMatcapMaterial matcap={basicMatcap} />
         </Text3D>
       </RigidBody> 
-      <RigidBody position={[0.3, 0, 0]} rotation-y={0}>
+      <RigidBody position={[0.48, 0, 0]} rotation-y={0}>
         <Text3D {...fontProps}>
           e
           <meshMatcapMaterial matcap={basicMatcap} />
@@ -78,13 +81,15 @@ export default function Text() {
 
 
 
-     
 
-      <RigidBody position={[0.2, 0.6, .05]} rotation={[0, 0, -0.3]} gravityScale={0.04}>
-        <Text3D {...fontProps} size={0.4} bevelThickness={0.03}>
-          Dev
+
+      <RigidBody position={[-.3, 0.1, 1]} rotation={[0, 0, 0]} gravityScale={.001}>
+     <Float floatingRange={[.15, .2]} rotationIntensity={2}>
+        <Text3D {...fontProps} size={0.3} bevelThickness={0.02}>
+          DeVeloPer
           <meshMatcapMaterial matcap={basicMatcap} />
         </Text3D>
+     </Float>
       </RigidBody> 
 
      
