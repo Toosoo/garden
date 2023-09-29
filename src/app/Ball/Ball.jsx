@@ -58,7 +58,7 @@ export default function Ball() {
 
 
 return(
-   
+ 
 
     <RigidBody 
     colliders='ball' 
@@ -75,5 +75,6 @@ return(
         </mesh>
     </RigidBody>
    
+      
 )
 }

@@ -13,6 +13,7 @@ import { Email } from "../Models/Email";
 import { Tree } from "../Models/Tree";
 import { Boy } from "../Models/Boy";
 import Ball from "../Ball/Ball";
+import { Egy } from "../Egy/Egy";
 
 function Three({ ready, setReady, start }) {
   const [dayTime, setDayTime] = useState(true);
@@ -135,7 +136,7 @@ function Three({ ready, setReady, start }) {
       <Perf position="top-left" />
 
       <OrbitControls makeDefault minDistance={6} maxDistance={7} autoRotate={false} minPolarAngle={1.45} maxPolarAngle={1.45} />
-
+    <ambientLight intensity={2}/>
       <Sparkles ref={sparklesRef} scale={5} size={3} color={"gold"} position={[0, 1, 0]} />
 
       <Sky
@@ -161,8 +162,11 @@ function Three({ ready, setReady, start }) {
       </group>
 
       <group position={[0, -1.3, 0]}>
-        {" "}
-        <Text />{" "}
+        <Text />
+      </group>
+
+      <group position={[4, 0, 0]}>
+        <Egy/>
       </group>
     </>
   );
