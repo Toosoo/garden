@@ -6,7 +6,7 @@ import { useEffect, useRef } from "react";
 
 
 export default function Ball() {
-  const [glassMatCap] = useMatcapTexture("2E763A_78A0B7_B3D1CF_14F209", 64);
+    const [basicMatcap] = useMatcapTexture("5ECBA4_BCFAE7_92EED0_A1F4DC", 64);
   const [subscribeKeys ,getKeys] = useKeyboardControls()
   const ball = useRef()
   const jump = () =>{
@@ -23,8 +23,6 @@ export default function Ball() {
 
   useFrame((state,delta)=>{
         const {forward,backward,rightward,leftward,jump} = getKeys()
-    
-
 
         const impulse = {x:0,y:0,z:0}
         const torque = {x:0,y:0,z:0}
@@ -73,7 +71,7 @@ return(
     >
         <mesh scale={.2}>
             <sphereGeometry />
-            <meshMatcapMaterial matcap={glassMatCap} />
+            <meshMatcapMaterial matcap={basicMatcap} />
         </mesh>
     </RigidBody>
    
