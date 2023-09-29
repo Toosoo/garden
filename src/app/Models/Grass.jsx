@@ -1,29 +1,38 @@
-import {  Cylinder, useGLTF } from "@react-three/drei";
+import {  Cylinder, useGLTF, useTexture } from "@react-three/drei";
 import { RigidBody } from "@react-three/rapier";
 
 
-export function Grass(props) {
-  const { nodes, materials } = useGLTF("/glbs/grass.glb");
+export function Grass() {
+ 
+  const texture = useTexture({
+    map:'/leaves/leaves_forest_ground_diff_1k.jpg',
+    displacementMap:'/leaves/leaves_forest_ground_disp_1k.jpg',
+    aoMap:'/leaves/leaves_forest_ground_arm_1k.jpg',
+    roughnessMap:'/leaves/leaves_forest_ground_arm_1k.jpg',
+    metalnessMap:'/leaves/leaves_forest_ground_arm_1k.jpg',
+    
+  })
 
-
-  return (
-    <group {...props} dispose={null} scale={0.00035}>
-      
+return (
+ 
       <RigidBody type="fixed" colliders='trimesh'>
-      <mesh position={[0,-400,0]} material={materials.N00_000_Hair_00_HAIR_Instance}>
-        <cylinderGeometry args={[12400, 11000,1100,100]}/>
-      </mesh>
-      </RigidBody>  
 
-        <mesh
-        geometry={nodes["Cubo129_N00_000_Hair_00_HAIR_(Instance)_0001"].geometry}
-        material={materials.N00_000_Hair_00_HAIR_Instance}
-        position={[52.939, 288.238, -0.003]}
-        rotation={[-Math.PI / 2, 0, -0.247]}
-        scale={[97, 97, 110]}
-      />  
-    </group>
+        <mesh rotation={[-Math.PI*.5,0,0]}>
+          <planeGeometry args={[10,10]}/>
+          <meshStandardMaterial {...texture} />
+        </mesh>
+
+
+
+      
+
+
+
+      </RigidBody> 
+       
+
+   
   );
 }
 
-useGLTF.preload("/glbs/grass.glb");
+
