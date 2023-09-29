@@ -9,12 +9,9 @@ export default function Ball() {
   const [glassMatCap] = useMatcapTexture("2E763A_78A0B7_B3D1CF_14F209", 64);
   const [subscribeKeys ,getKeys] = useKeyboardControls()
   const ball = useRef()
-
-
   const jump = () =>{
         ball.current.applyImpulse({x:0,y:.1,z:0})
   }
-
   useEffect(()=>{
     subscribeKeys(
         (state)=>state.jump,
@@ -32,8 +29,8 @@ export default function Ball() {
         const impulse = {x:0,y:0,z:0}
         const torque = {x:0,y:0,z:0}
 
-        const impulseStrength = .05 * delta
-        const torqueStrength = .05 * delta
+        const impulseStrength = .03 * delta
+        const torqueStrength = .03 * delta
 
         if(forward)
         {

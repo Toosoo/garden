@@ -20,15 +20,14 @@ export default function Text() {
   };
 
   return (
-    <group position={[0, 0, 3]}>
+    <group position={[0, 0, 3.3]}>
+
 
        <RigidBody position={[-0.7, 0, 0]} rotation-y={0.2} >
-      <Float floatingRange={[.15, .2]} rotationIntensity={2}>
         <Text3D {...fontProps}>
           C
           <meshMatcapMaterial matcap={basicMatcap} />
         </Text3D>
-      </Float>
       </RigidBody>
 
       <RigidBody position={[-0.5, 0, 0]} rotation-y={0.2}>
@@ -79,17 +78,16 @@ export default function Text() {
       </RigidBody> 
 
 
+     
 
 
 
 
-      <RigidBody position={[-.3, 0.1, 1]} rotation={[0, 0, 0]} gravityScale={.001}>
-     <Float floatingRange={[.15, .2]} rotationIntensity={2}>
+      <RigidBody position={[.4, 0, .4]} rotation={[0, 0, 0]} >
         <Text3D {...fontProps} size={0.3} bevelThickness={0.02}>
           DeVeloPer
           <meshMatcapMaterial matcap={basicMatcap} />
         </Text3D>
-     </Float>
       </RigidBody> 
 
      
