@@ -1,9 +1,9 @@
 
 import { useGLTF, useTexture } from "@react-three/drei";
-import { RigidBody } from "@react-three/rapier";
+
 
 export function Tree(props) {
-  const { nodes, materials } = useGLTF("/glbs/tree.glb");
+  const {nodes} = useGLTF("/glbs/tree.glb");
   const glassMatcap = useTexture('/glass.png');
   
   return (

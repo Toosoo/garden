@@ -1,4 +1,4 @@
-import { Suspense, useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 import gsap from "gsap";
 import { useGLTF, OrbitControls, Sky, Sparkles, Html, KeyboardControls } from "@react-three/drei";
 import { Perf } from "r3f-perf";

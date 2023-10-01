@@ -1,4 +1,4 @@
-import { KeyboardControls, useTexture } from "@react-three/drei";
+import { useTexture } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { RigidBody } from "@react-three/rapier";
 import { useKeyboardControls } from "@react-three/drei";
@@ -22,7 +22,7 @@ export default function Ball() {
   },[])
 
   useFrame((state,delta)=>{
-        const {forward,backward,rightward,leftward,jump} = getKeys()
+        const {forward,backward,rightward,leftward} = getKeys()
 
         const impulse = {x:0,y:0,z:0}
         const torque = {x:0,y:0,z:0}
