@@ -1,4 +1,4 @@
-import { KeyboardControls, useMatcapTexture } from "@react-three/drei";
+import { KeyboardControls, useTexture } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { RigidBody } from "@react-three/rapier";
 import { useKeyboardControls } from "@react-three/drei";
@@ -6,7 +6,7 @@ import { useEffect, useRef } from "react";
 
 
 export default function Ball() {
-    const [basicMatcap] = useMatcapTexture("5ECBA4_BCFAE7_92EED0_A1F4DC", 64);
+    const basicMatcap = useTexture('/basic.png');
   const [subscribeKeys ,getKeys] = useKeyboardControls()
   const ball = useRef()
   const jump = () =>{
