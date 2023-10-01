@@ -13,7 +13,7 @@ import { Email } from "../Models/Email";
 import { Tree } from "../Models/Tree";
 import { Boy } from "../Models/Boy";
 import Ball from "../Ball/Ball";
-import { Egy } from "../Egy/Egy";
+
 
 function Three({ ready, setReady, start }) {
   const [dayTime, setDayTime] = useState(true);
@@ -165,9 +165,6 @@ function Three({ ready, setReady, start }) {
         <Ball />
       </group>
 
-      <group  position={[4, 0, 0]}>
-        <Egy/>
-      </group>  
      
       <group  position={[0, -1.3, 3.6]}>
         <Text />
