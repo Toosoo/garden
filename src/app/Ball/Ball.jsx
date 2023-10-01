@@ -27,8 +27,8 @@ export default function Ball() {
         const impulse = {x:0,y:0,z:0}
         const torque = {x:0,y:0,z:0}
 
-        const impulseStrength = .03 * delta
-        const torqueStrength = .03 * delta
+        const impulseStrength = .01 * delta
+        const torqueStrength = .01 * delta
 
         if(forward)
         {
@@ -69,7 +69,7 @@ return(
     linearDamping={.5}
     angularDamping={.5}
     >
-        <mesh scale={.2}>
+        <mesh scale={.15}>
             <sphereGeometry />
             <meshMatcapMaterial matcap={basicMatcap} />
         </mesh>

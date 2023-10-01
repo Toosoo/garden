@@ -20,7 +20,7 @@ export function Grass(props) {
         material={materials.N00_000_Hair_00_HAIR_Instance}
         position={[52.939, 288.238, -0.003]}
         rotation={[-Math.PI / 2, 0, -0.247]}
-        scale={[97, 97, 110]}
+        scale={[97, 97, 90]}
       />  
     </group>
   );

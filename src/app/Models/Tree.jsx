@@ -8,7 +8,7 @@ export function Tree(props) {
   const [brushedMC] = useMatcapTexture("2B2828_7B796F_534F4A_616464", 64);
   return (
     
-    <group {...props} dispose={null} scale={0.17}>
+    <group {...props} dispose={null} scale={0.13}>
       <mesh geometry={nodes.Object_4.geometry}>
         <meshMatcapMaterial matcap={glassMC} />
       </mesh>

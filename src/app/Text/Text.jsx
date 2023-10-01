@@ -20,7 +20,7 @@ export default function Text() {
   };
 
   return (
-    <group position={[0, 0, 3.3]}>
+    <group scale={.8} >
 
 
        <RigidBody position={[-0.7, 0, 0]} rotation-y={0.2} >
@@ -51,7 +51,7 @@ export default function Text() {
         </Text3D>
       </RigidBody> 
 
-      <RigidBody position={[-0.05, 0, 0]} rotation-y={0}>
+      <RigidBody position={[-0.05, 0, 0]} rotation-y={.3}>
         <Text3D {...fontProps}>
           T
           <meshMatcapMaterial matcap={basicMatcap} />

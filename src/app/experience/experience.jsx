@@ -148,28 +148,30 @@ function Three({ ready, setReady, start }) {
 
        
 
-      <group position={[0, -1.4, 0]}>
-        {/* <Tree />
-        <Boy /> */}
+      <group  position={[0, -1.4, 0]}>
+        <Tree />
+        <Boy /> 
         <Grass />
       </group>
-{/* 
-      <group position={[-3.5, -0.5, 0]} rotation={[0, Math.PI / 2, 0]}>
+
+     
+ 
+      <group  position={[-3.5, -0.5, 0]} rotation={[0, Math.PI / 2, 0]}>
         <Insta />
         <Email />
       </group>
 
-      <group position={[0, 0, 1]}>
+      <group  position={[0, 0, 1]}>
         <Ball />
       </group>
 
-      <group position={[0, -1.3, 0]}>
+      <group  position={[4, 0, 0]}>
+        <Egy/>
+      </group>  
+     
+      <group  position={[0, -1.3, 3.6]}>
         <Text />
       </group>
-
-      <group position={[4, 0, 0]}>
-        <Egy/>
-      </group> */}
     </>
   );
 }
