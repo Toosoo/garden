@@ -136,7 +136,7 @@ function Three({ ready, setReady, start }) {
       <Perf position="top-left" />
 
       <OrbitControls makeDefault minDistance={6} maxDistance={7} autoRotate={false} minPolarAngle={1.45} maxPolarAngle={1.45} />
- 
+    <ambientLight intensity={2}/>
       <Sparkles ref={sparklesRef} scale={5} size={3} color={"gold"} position={[0, 1, 0]} />
 
       <Sky
