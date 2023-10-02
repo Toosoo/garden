@@ -9,7 +9,7 @@ function App() {
 
   return (
     <>
-      <Intro setReady={setReady} ready={ready} setStart={setStart} start={start} />  
+      {/* <Intro setReady={setReady} ready={ready} setStart={setStart} start={start} />   */}
       <Suspense>
         <Experience setReady={setReady} start={start} ready={ready} />
       </Suspense>

@@ -136,7 +136,7 @@ function Three({ ready, setReady, start }) {
       <Perf position="top-left" />
 
       <OrbitControls makeDefault minDistance={6} maxDistance={7} autoRotate={false} minPolarAngle={1.45} maxPolarAngle={1.45} />
-    <ambientLight intensity={2}/>
+    
       <Sparkles ref={sparklesRef} scale={5} size={3} color={"gold"} position={[0, 1, 0]} />
 
       <Sky
@@ -145,17 +145,13 @@ function Three({ ready, setReady, start }) {
         turbidity={10} // 60 for dark
         mieCoefficient={0.005} // .05 for dark
       />
-
        
-
       <group  position={[0, -1.4, 0]}>
         <Tree />
         <Boy /> 
         <Grass />
       </group>
 
-     
- 
       <group  position={[-3.5, -0.5, 0]} rotation={[0, Math.PI / 2, 0]}>
         <Insta />
         <Email />
