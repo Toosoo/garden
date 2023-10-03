@@ -5,8 +5,6 @@ import { RigidBody } from "@react-three/rapier";
 export default function Text() {
   const basicMatcap = useTexture("/basic.png");
 
-  console.log(basicMatcap);
-
   const fontProps = {
     font: "/fonts/SC-font.json",
     bevelEnabled: true,

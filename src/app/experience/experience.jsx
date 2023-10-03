@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import gsap from "gsap";
-import { useGLTF, OrbitControls, Sky, Sparkles, Html, KeyboardControls } from "@react-three/drei";
+import { useGLTF, OrbitControls, Sky, Sparkles, Html, KeyboardControls, useProgress } from "@react-three/drei";
 import { Perf } from "r3f-perf";
 import { useFrame, Canvas } from "@react-three/fiber";
 import Text from "../Text/Text";
@@ -14,9 +14,13 @@ import { Tree } from "../Models/Tree";
 import { Boy } from "../Models/Boy";
 import Ball from "../Ball/Ball";
 
+function Loading({setReady}){
+  const { active } = useProgress()
+  active ? null : setReady(true)
+}  
 
-function Three({ ready, setReady, start }) {
-  const [dayTime, setDayTime] = useState(true);
+function Three({ready}) {
+  const [dayTime, setDayTime] = useState(false);
   const tl = useRef();
   let musicTL = useRef();
   const skyRef = useRef();
@@ -24,83 +28,93 @@ function Three({ ready, setReady, start }) {
   const dotRef = useRef();
   const [music, setMusic] = useState(true);
 
-  const natureMusic = new Audio(dayURL);
-  natureMusic.loop = true;
+  const dayMusic = new Audio(dayURL);
+  dayMusic.loop = true;
+  const nightMusic = new Audio(NightURL);
+  nightMusic.loop = true;
+
+  
+  
+
 
   useEffect(() => {
-    setReady(true);
-    const ctx = gsap.context((context) => {
-      tl.current && tl.current.progress(0).kill();
-      tl.current = gsap
-        .timeline({ defaults: { duration: 0.7, ease: "sine" } })
-        .to(dotRef.current, {
-          left: "58%",
-          backgroundImage: "linear-gradient(#777,#3a3a3a)",
-        })
-        .to(
-          skyRef.current.material.uniforms.sunPosition.value,
-          {
-            x: 1,
-            y: 0,
-            z: 0,
-          },
-          "<"
-        )
-        .to(
-          skyRef.current.material.uniforms.turbidity,
-          {
-            value: 60,
-          },
-          "<"
-        )
-        .to(
-          skyRef.current.material.uniforms.mieCoefficient,
-          {
-            value: 0.05,
-          },
-          "<"
-        )
-        .from(
-          sparklesRef.current.material,
-          {
-            visible: false,
-          },
-          "<50%"
-        );
-    });
-    return () => ctx.revert();
-  }, []);
+    if(ready) {
+      const ctx = gsap.context((context) => {
+        tl.current && tl.current.progress(0).kill();
+        tl.current = gsap
+          .timeline({ defaults: { duration: 1, ease: "sine" } })
+          .to(dotRef.current, {
+            left: "58%",
+            backgroundImage: "linear-gradient(#777,#3a3a3a)",
+            duration:.5
+          })
+          .to(
+            skyRef.current.material.uniforms.sunPosition.value,
+            {
+              x: 1,
+              y: 0,
+              z: 0,
+            },
+            "<"
+          )
+          .to(
+            skyRef.current.material.uniforms.turbidity,
+            {
+              value: 60,
+            },
+            "<"
+          )
+          .to(
+            skyRef.current.material.uniforms.mieCoefficient,
+            {
+              value: 0.05,
+            },
+            "<"
+          )
+          .from(
+            sparklesRef.current.material,
+            {
+              visible: false,
+            },
+            "<50%"
+          );
+      });
+      return () => ctx.revert();
+    }
+ 
+  }, [ready]);
 
   useEffect(() => {
-    tl.current.reversed(dayTime);
+    ready ?  tl.current.reversed(dayTime) : null
+    
   }, [dayTime]);
 
-  const soundSwitcher = () => {
-    setMusic(!music);
-    musicTL.kill();
-    musicTL.to(".sound-charts path:nth-child(odd)", {
-      scale: 0.5,
-      stagger: 0.1,
-      yoyo: true,
-      repeat: -1,
-      transformOrigin: "center",
-    });
-    musicTL.to(
-      ".sound-charts path:nth-child(even)",
-      {
+
+  const musicSwitch = () => {
+    setMusic(!music)
+    musicTL.current && musicTL.current.progress(0).kill()
+    if(music) {
+      dayMusic.play()
+      musicTL.current = gsap.timeline() 
+      .to(".sound-charts path:nth-child(odd)", {
         scale: 0.5,
-        delay: 0.3,
+        stagger: 0.1,
         yoyo: true,
         repeat: -1,
         transformOrigin: "center",
-      },
-      "<"
-    );
-    console.log(music);
-    if (music) {
-      musicTL.play();
-    } else {
-      musicTL.kill();
+      }).to(
+        ".sound-charts path:nth-child(even)",
+        {
+          scale: 0.5,
+          delay: 0.3,
+          yoyo: true,
+          repeat: -1,
+          transformOrigin: "center",
+        },
+        "<"
+      );
+    }  else {
+      dayMusic.pause()
     }
   };
 
@@ -123,7 +137,7 @@ function Three({ ready, setReady, start }) {
           <span ref={dotRef} className="dot absolute left-[4%] w-10 h-10 rounded-full bg-black z-[-1]  shadow-md"></span>
         </button>
 
-        <button className="playButton absolute right-10" onClick={soundSwitcher}>
+        <button className="playButton absolute right-10" onClick={musicSwitch}>
           <svg className="sound-charts" width="40" viewBox="0 0 74 74" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M12.4234 34.0292L12.4234 39.9708" stroke="white" strokeWidth="3" strokeLinecap="round" />
             <path d="M24.5766 21.3358L24.5767 52.9343" stroke="white" strokeWidth="3" strokeLinecap="round" />
@@ -152,10 +166,10 @@ function Three({ ready, setReady, start }) {
         <Grass />
       </group>
 
-      <group  position={[-3.5, -0.5, 0]} rotation={[0, Math.PI / 2, 0]}>
+      {/* <group  position={[-3.5, -0.5, 0]} rotation={[0, Math.PI / 2, 0]}>
         <Insta />
         <Email />
-      </group>
+      </group> */}
 
       <group  position={[0, 0, 1]}>
         <Ball />
@@ -169,21 +183,20 @@ function Three({ ready, setReady, start }) {
   );
 }
 
-export default function Experience({ ready, setReady, start }) {
+export default function Experience({setReady,ready}) {
   return (
     <KeyboardControls
-      map={[
-        { name: "forward", keys: ["ArrowUp", "KeyW"] },
-        { name: "backward", keys: ["ArrowDown", "KeyS"] },
-        { name: "leftward", keys: ["ArrowLeft", "KeyA"] },
-        { name: "rightward", keys: ["ArrowRight", "KeyD"] },
-        { name: "jump", keys: ["Space"] },
-      ]}>
-      <Canvas camera={{ near: 0.1, far: 50, position: [0, 0, 7], rotation: [0, 0, 0] }}>
+    map={[
+      { name: "forward", keys: ["ArrowUp", "KeyW"] },
+      { name: "backward", keys: ["ArrowDown", "KeyS"] },
+      { name: "leftward", keys: ["ArrowLeft", "KeyA"] },
+      { name: "rightward", keys: ["ArrowRight", "KeyD"] },
+      { name: "jump", keys: ["Space"] },
+    ]}>
+        <Loading setReady={setReady} />
         <Physics>
-          <Three setReady={setReady} ready={ready} start={start} />
+          <Three ready={ready} />
         </Physics>
-      </Canvas>
     </KeyboardControls>
   );
 }
