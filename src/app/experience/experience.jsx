@@ -16,7 +16,11 @@ import Ball from "../Ball/Ball";
 
 function Loading({setReady}){
   const { active } = useProgress()
-  active ? null : setReady(true)
+  useEffect(()=>{
+
+    active ? null : setReady(true)
+    console.log(active)
+  },[active])
 }  
 
 function Three({ready}) {
@@ -43,12 +47,11 @@ function Three({ready}) {
         tl.current && tl.current.progress(0).kill();
         tl.current = gsap
           .timeline({ defaults: { duration: 1, ease: "sine" } })
-          .to(dotRef.current, {
+          .from(dotRef.current, {
             left: "58%",
             backgroundImage: "linear-gradient(#777,#3a3a3a)",
-            duration:.5
-          })
-          .to(
+          },0)
+          .from(
             skyRef.current.material.uniforms.sunPosition.value,
             {
               x: 1,
@@ -57,36 +60,30 @@ function Three({ready}) {
             },
             "<"
           )
-          .to(
+          .from(
             skyRef.current.material.uniforms.turbidity,
             {
               value: 60,
             },
             "<"
           )
-          .to(
+          .from(
             skyRef.current.material.uniforms.mieCoefficient,
             {
               value: 0.05,
             },
             "<"
           )
-          .from(
-            sparklesRef.current.material,
-            {
+          .to(sparklesRef.current.material,{
               visible: false,
-            },
-            "<50%"
-          );
+            },'<');
       });
       return () => ctx.revert();
     }
- 
   }, [ready]);
 
   useEffect(() => {
     ready ?  tl.current.reversed(dayTime) : null
-    
   }, [dayTime]);
 
 
