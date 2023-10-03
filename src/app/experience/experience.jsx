@@ -17,9 +17,7 @@ import Ball from "../Ball/Ball";
 function Loading({setReady}){
   const { active } = useProgress()
   useEffect(()=>{
-
     active ? null : setReady(true)
-    console.log(active)
   },[active])
 }  
 
@@ -47,10 +45,7 @@ function Three({ready}) {
         tl.current && tl.current.progress(0).kill();
         tl.current = gsap
           .timeline({ defaults: { duration: 1, ease: "sine" } })
-          .from(dotRef.current, {
-            left: "58%",
-            backgroundImage: "linear-gradient(#777,#3a3a3a)",
-          },0)
+          
           .from(
             skyRef.current.material.uniforms.sunPosition.value,
             {
@@ -58,25 +53,27 @@ function Three({ready}) {
               y: 0,
               z: 0,
             },
-            "<"
+            0
           )
+          .from(dotRef.current, {
+            left: "58%",
+            backgroundImage: "linear-gradient(#777,#3a3a3a)",
+            duration: .5,
+            ease: "linear"
+          },0)
           .from(
             skyRef.current.material.uniforms.turbidity,
             {
               value: 60,
-            },
-            "<"
-          )
+            },  0)
           .from(
             skyRef.current.material.uniforms.mieCoefficient,
             {
               value: 0.05,
-            },
-            "<"
-          )
+            },0)
           .to(sparklesRef.current.material,{
               visible: false,
-            },'<');
+            },0);
       });
       return () => ctx.revert();
     }
