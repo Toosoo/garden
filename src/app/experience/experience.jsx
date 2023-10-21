@@ -5,9 +5,6 @@ import { Perf } from "r3f-perf";
 import { useFrame, Canvas } from "@react-three/fiber";
 import Text from "../Text/Text";
 import { Physics, RigidBody } from "@react-three/rapier";
-import { Grass } from "../Models/Grass";
-import { Insta } from "../Models/Insta";
-import { Email } from "../Models/Email";
 import { Tree } from "../Models/Tree";
 import { Boy } from "../Models/Boy";
 import Ball from "../Ball/Ball";
@@ -156,14 +153,9 @@ function Three({ready}) {
       <group  position={[0, -1.5, 0]}>
         <Tree />
         <Boy /> 
-        <Grass />
       </group>
 
-     {/* <group  position={[-3.5, -0.5, 0]} rotation={[0, Math.PI / 2, 0]}>
-        <Insta />
-        <Email />
-      </group> 
-
+     {/* 
       <group  position={[0, 0, 1]}>
         <Ball />
       </group> */}
