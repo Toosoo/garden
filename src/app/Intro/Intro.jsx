@@ -1,13 +1,16 @@
 import { Suspense, useEffect, useState, useRef, useLayoutEffect } from "react";
 import { gsap } from "gsap";
 import SplitType from "split-type";
-export default function Intro({ ready, setStart, start }) {
+
+export default function Intro({ ready }) {
   const introRef = useRef();
+
+
 
   useEffect(() => {
     const text = SplitType.create(".title", { types: "chars" });
     gsap.set(".title .char", { opacity: 0 });
-    if (ready) {
+    
       const ctx = gsap.context((context) => {
         gsap.to(".title .char", {
           opacity: 1,
@@ -18,13 +21,12 @@ export default function Intro({ ready, setStart, start }) {
         });
       }, introRef);
       return () => ctx.revert();
-    }
+    
   }, [ready]);
 
   const introAnim = () => {
     if (ready) {
       gsap.to(introRef.current, { keyframes: [{ opacity: 0 }, { display: "none" }] });
-      setStart(true);
     }
   };
 

@@ -5,8 +5,6 @@ import { Perf } from "r3f-perf";
 import { useFrame, Canvas } from "@react-three/fiber";
 import Text from "../Text/Text";
 import { Physics, RigidBody } from "@react-three/rapier";
-import dayURL from "/sounds/day.mp3";
-import NightURL from "/sounds/night.mp3";
 import { Grass } from "../Models/Grass";
 import { Insta } from "../Models/Insta";
 import { Email } from "../Models/Email";
@@ -30,12 +28,12 @@ function Three({ready}) {
   const dotRef = useRef();
   const [music, setMusic] = useState(true);
 
-  const dayMusic = new Audio(dayURL);
+  const [dayMusic,setDayMusic] = useState(new Audio('/sounds/day.mp3'));
+  const [nightMusic,setNightMusic] = useState(new Audio('/sounds/night.mp3'));
   dayMusic.loop = true;
-  const nightMusic = new Audio(NightURL);
   nightMusic.loop = true;
 
-  
+  console.log('rendered')
   
 
 
@@ -44,7 +42,7 @@ function Three({ready}) {
       const ctx = gsap.context((context) => {
         tl.current && tl.current.progress(0).kill();
         tl.current = gsap
-          .timeline({ defaults: { duration: 1, ease: "sine" } })
+          .timeline({ defaults: { duration: .7, ease: "sine" } })
           
           .from(
             skyRef.current.material.uniforms.sunPosition.value,
@@ -129,6 +127,7 @@ function Three({ready}) {
               d="M233.54 142.23a8 8 0 0 0-8-2a88.08 88.08 0 0 1-109.8-109.8a8 8 0 0 0-10-10a104.84 104.84 0 0 0-52.91 37A104 104 0 0 0 136 224a103.09 103.09 0 0 0 62.52-20.88a104.84 104.84 0 0 0 37-52.91a8 8 0 0 0-1.98-7.98Zm-44.64 48.11A88 88 0 0 1 65.66 67.11a89 89 0 0 1 31.4-26A106 106 0 0 0 96 56a104.11 104.11 0 0 0 104 104a106 106 0 0 0 14.92-1.06a89 89 0 0 1-26.02 31.4Z"></path>
           </svg>
           <span ref={dotRef} className="dot absolute left-[4%] w-10 h-10 rounded-full bg-black z-[-1]  shadow-md"></span>
+          
         </button>
 
         <button className="playButton absolute right-10" onClick={musicSwitch}>
@@ -143,7 +142,7 @@ function Three({ready}) {
       </Html>
       <Perf position="top-left" />
 
-      <OrbitControls makeDefault minDistance={6} maxDistance={7} autoRotate={false} minPolarAngle={1.45} maxPolarAngle={1.45} />
+      <OrbitControls makeDefault enableZoom={false} autoRotate={false} minPolarAngle={1.45} maxPolarAngle={1.45} />
     
       <Sparkles ref={sparklesRef} scale={5} size={3} color={"gold"} position={[0, 1, 0]} />
 
@@ -154,25 +153,28 @@ function Three({ready}) {
         mieCoefficient={0.005} // .05 for dark
       />
        
-      <group  position={[0, -1.4, 0]}>
+      <group  position={[0, -1.5, 0]}>
         <Tree />
         <Boy /> 
         <Grass />
       </group>
 
-      {/* <group  position={[-3.5, -0.5, 0]} rotation={[0, Math.PI / 2, 0]}>
+     {/* <group  position={[-3.5, -0.5, 0]} rotation={[0, Math.PI / 2, 0]}>
         <Insta />
         <Email />
-      </group> */}
+      </group> 
 
       <group  position={[0, 0, 1]}>
         <Ball />
-      </group>
+      </group> */}
 
      
       <group  position={[0, -1.3, 3.6]}>
         <Text />
-      </group>
+      </group> 
+
+      
+
     </>
   );
 }
