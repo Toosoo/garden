@@ -1,10 +1,8 @@
 import { useEffect, useState, useRef } from "react";
 import gsap from "gsap";
-import { useGLTF, OrbitControls, Sky, Sparkles, Html, KeyboardControls, useProgress } from "@react-three/drei";
-import { Perf } from "r3f-perf";
-import { useFrame, Canvas } from "@react-three/fiber";
+import {  OrbitControls, Sky, Sparkles, Html, KeyboardControls, useProgress } from "@react-three/drei";
 import Text from "../Text/Text";
-import { Physics, RigidBody } from "@react-three/rapier";
+import { Physics } from "@react-three/rapier";
 import { Grass } from "../Models/Grass";
 import { Tree } from "../Models/Tree";
 import { Boy } from "../Models/Boy";
