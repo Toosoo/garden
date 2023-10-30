@@ -10,14 +10,14 @@ import { Tree } from "../Models/Tree";
 import { Boy } from "../Models/Boy";
 import Ball from "../Ball/Ball";
 
-function Loading({setReady}){
-  const { active } = useProgress()
-  useEffect(()=>{
-    active ? null : setReady(true)
-  },[active])
-}  
+function Loading({ setReady }) {
+  const { active } = useProgress();
+  useEffect(() => {
+    active ? null : setReady(true);
+  }, [active]);
+}
 
-function Three({ready}) {
+function Three({ ready }) {
   const [dayTime, setDayTime] = useState(false);
   const tl = useRef();
   let musicTL = useRef();
@@ -26,22 +26,18 @@ function Three({ready}) {
   const dotRef = useRef();
   const [music, setMusic] = useState(true);
 
-  const [dayMusic,setDayMusic] = useState(new Audio('/sounds/day.mp3'));
-  const [nightMusic,setNightMusic] = useState(new Audio('/sounds/night.mp3'));
+  const [dayMusic, setDayMusic] = useState(new Audio("/sounds/day.mp3"));
+  const [nightMusic, setNightMusic] = useState(new Audio("/sounds/night.mp3"));
   dayMusic.loop = true;
   nightMusic.loop = true;
 
-
-  
-
-
   useEffect(() => {
-    if(ready) {
+    if (ready) {
       const ctx = gsap.context((context) => {
         tl.current && tl.current.progress(0).kill();
         tl.current = gsap
-          .timeline({ defaults: { duration: .7, ease: "sine" } })
-          
+          .timeline({ defaults: { duration: 0.7, ease: "sine" } })
+
           .from(
             skyRef.current.material.uniforms.sunPosition.value,
             {
@@ -51,60 +47,73 @@ function Three({ready}) {
             },
             0
           )
-          .from(dotRef.current, {
-            left: "58%",
-            backgroundImage: "linear-gradient(#777,#3a3a3a)",
-            duration: .5,
-            ease: "linear"
-          },0)
+          .from(
+            dotRef.current,
+            {
+              left: "58%",
+              backgroundImage: "linear-gradient(#777,#3a3a3a)",
+              duration: 0.5,
+              ease: "linear",
+            },
+            0
+          )
           .from(
             skyRef.current.material.uniforms.turbidity,
             {
               value: 60,
-            },  0)
+            },
+            0
+          )
           .from(
             skyRef.current.material.uniforms.mieCoefficient,
             {
               value: 0.05,
-            },0)
-          .to(sparklesRef.current.material,{
+            },
+            0
+          )
+          .to(
+            sparklesRef.current.material,
+            {
               visible: false,
-            },0);
+            },
+            0
+          );
       });
       return () => ctx.revert();
     }
   }, [ready]);
 
   useEffect(() => {
-    ready ?  tl.current.reversed(dayTime) : null
+    ready ? tl.current.reversed(dayTime) : null;
   }, [dayTime]);
 
-
   const musicSwitch = () => {
-    setMusic(!music)
-    musicTL.current && musicTL.current.progress(0).kill()
-    if(music) {
-      dayMusic.play()
-      musicTL.current = gsap.timeline() 
-      .to(".sound-charts path:nth-child(odd)", {
-        scale: 0.5,
-        stagger: 0.1,
-        yoyo: true,
-        repeat: -1,
-        transformOrigin: "center",
-      }).to(
-        ".sound-charts path:nth-child(even)",
-        {
+    setMusic(!music);
+    musicTL.current && musicTL.current.progress(0).kill();
+    if (music) {
+      dayMusic.play();
+      musicTL.current = gsap
+        .timeline()
+        .to(".sound-charts path:nth-child(odd)", {
           scale: 0.5,
-          delay: 0.3,
+          stagger: 0.1,
           yoyo: true,
           repeat: -1,
           transformOrigin: "center",
-        },
-        "<"
-      );
-    }  else {
-      dayMusic.pause()
+        })
+        .to(
+          ".sound-charts path:nth-child(even)",
+          {
+            scale: 0.5,
+            delay: 0.3,
+            yoyo: true,
+            repeat: -1,
+            transformOrigin: "center",
+          },
+          "<"
+        );
+    } else {
+      dayMusic.pause();
     }
   };
 
@@ -125,7 +134,6 @@ function Three({ready}) {
               d="M233.54 142.23a8 8 0 0 0-8-2a88.08 88.08 0 0 1-109.8-109.8a8 8 0 0 0-10-10a104.84 104.84 0 0 0-52.91 37A104 104 0 0 0 136 224a103.09 103.09 0 0 0 62.52-20.88a104.84 104.84 0 0 0 37-52.91a8 8 0 0 0-1.98-7.98Zm-44.64 48.11A88 88 0 0 1 65.66 67.11a89 89 0 0 1 31.4-26A106 106 0 0 0 96 56a104.11 104.11 0 0 0 104 104a106 106 0 0 0 14.92-1.06a89 89 0 0 1-26.02 31.4Z"></path>
           </svg>
           <span ref={dotRef} className="dot absolute left-[4%] w-10 h-10 rounded-full bg-black z-[-1]  shadow-md"></span>
-          
         </button>
 
         <button className="playButton absolute right-10" onClick={musicSwitch}>
@@ -138,10 +146,10 @@ function Three({ready}) {
           </svg>
         </button>
       </Html>
-      <Perf position="top-left" />
+     
 
       <OrbitControls makeDefault enableZoom={false} autoRotate={false} minPolarAngle={1.45} maxPolarAngle={1.45} />
-    
+
       <Sparkles ref={sparklesRef} scale={5} size={3} color={"gold"} position={[0, 1, 0]} />
 
       <Sky
@@ -150,43 +158,38 @@ function Three({ready}) {
         turbidity={10} // 60 for dark
         mieCoefficient={0.005} // .05 for dark
       />
-       
-      <group  position={[0, -1.5, 0]}>
+
+      <group position={[0, -1.5, 0]}>
         <Tree />
-        <Boy /> 
+        <Grass />
+        <Boy />
       </group>
 
-     
-      
-      <group  position={[0, 0, 1]}>
+      <group position={[0, 0, 1]}>
         <Ball />
-      </group> 
+      </group>
 
-     
-      <group  position={[0, -1.3, 3.6]}>
+      <group position={[0, -1.3, 3.6]}>
         <Text />
-      </group> 
-
-      
-
+      </group>
     </>
   );
 }
 
-export default function Experience({setReady,ready}) {
+export default function Experience({ setReady, ready }) {
   return (
     <KeyboardControls
-    map={[
-      { name: "forward", keys: ["ArrowUp", "KeyW"] },
-      { name: "backward", keys: ["ArrowDown", "KeyS"] },
-      { name: "leftward", keys: ["ArrowLeft", "KeyA"] },
-      { name: "rightward", keys: ["ArrowRight", "KeyD"] },
-      { name: "jump", keys: ["Space"] },
-    ]}>
-        <Loading setReady={setReady} />
-        <Physics>
-          <Three ready={ready} />
-        </Physics>
+      map={[
+        { name: "forward", keys: ["ArrowUp", "KeyW"] },
+        { name: "backward", keys: ["ArrowDown", "KeyS"] },
+        { name: "leftward", keys: ["ArrowLeft", "KeyA"] },
+        { name: "rightward", keys: ["ArrowRight", "KeyD"] },
+        { name: "jump", keys: ["Space"] },
+      ]}>
+      <Loading setReady={setReady} />
+      <Physics>
+        <Three ready={ready} />
+      </Physics>
     </KeyboardControls>
   );
 }
