@@ -27,44 +27,6 @@ export default function Text() {
         </Text3D>
       </RigidBody>
 
-      {/* <RigidBody position={[-0.5, 0, 0]} rotation-y={0.2}>
-        <Text3D {...fontProps}>
-          A
-          <meshMatcapMaterial matcap={basicMatcap} />
-        </Text3D>
-      </RigidBody>
-
-      <RigidBody position={[-0.3, 0, 0]} rotation-y={-0.1}>
-        <Text3D {...fontProps}>
-         R
-          <meshMatcapMaterial matcap={basicMatcap} />
-        </Text3D>
-      </RigidBody>
-
-      <RigidBody position={[-0.15, 0, 0]} rotation-y={.1}>
-        <Text3D {...fontProps}>
-          D
-          <meshMatcapMaterial matcap={basicMatcap} />
-        </Text3D>
-      </RigidBody>
-
-      <RigidBody position={[-0.05, 0, 0]} rotation-y={0.7}>
-        <Text3D {...fontProps}>
-          E
-          <meshMatcapMaterial matcap={basicMatcap} />
-        </Text3D>
-      </RigidBody>
-
-      <RigidBody position={[0.2, 0, 0]} rotation-y={0}>
-        <Text3D {...fontProps}>
-          N
-          <meshMatcapMaterial matcap={basicMatcap} />
-        </Text3D>
-      </RigidBody>
-      */}
-      
-
-      
     </group>
   );
 }
