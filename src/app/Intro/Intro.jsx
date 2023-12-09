@@ -38,6 +38,9 @@ export default function Intro({ ready }) {
         <span className="title">start</span>
         <span className="loadTitle  absolute">loading</span>
       </button>
+      <span className="absolute bottom-5 text-2xl">
+        this is just a demo
+      </span>
     </div>
   );
 }

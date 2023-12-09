@@ -83,13 +83,22 @@ function Three({ ready }) {
 
   useEffect(() => {
     ready ? tl.current.reversed(dayTime) : null;
+
+    if(dayTime){
+      nightMusic.play();
+      dayMusic.pause();
+    } else  {
+      dayMusic.play();
+      nightMusic.pause();
+    }
+
   }, [dayTime]);
 
   const musicSwitch = () => {
     setMusic(!music);
     musicTL.current && musicTL.current.progress(0).kill();
     if (music) {
-      dayMusic.play();
+      dayTime ?   nightMusic.play() : dayMusic.play() 
       musicTL.current = gsap
         .timeline()
         .to(".sound-charts path:nth-child(odd)", {
@@ -112,6 +121,7 @@ function Three({ ready }) {
         );
     } else {
       dayMusic.pause();
+      nightMusic.pause();
     }
   };
 

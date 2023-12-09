@@ -41,14 +41,14 @@ export default function Text() {
         </Text3D>
       </RigidBody>
 
-      <RigidBody position={[-0.15, 0, 0]} rotation-y={0}>
+      <RigidBody position={[-0.15, 0, 0]} rotation-y={.1}>
         <Text3D {...fontProps}>
           a
           <meshMatcapMaterial matcap={basicMatcap} />
         </Text3D>
       </RigidBody>
 
-      <RigidBody position={[-0.05, 0, 0]} rotation-y={0.3}>
+      <RigidBody position={[-0.05, 0, 0]} rotation-y={0.7}>
         <Text3D {...fontProps}>
           T
           <meshMatcapMaterial matcap={basicMatcap} />
