@@ -22,64 +22,49 @@ export default function Text() {
     <group scale={0.8}>
       <RigidBody position={[-0.7, 0, 0]} rotation-y={0.2}>
         <Text3D {...fontProps}>
-          C
+          GARDEN
           <meshMatcapMaterial matcap={basicMatcap} />
         </Text3D>
       </RigidBody>
 
-      <RigidBody position={[-0.5, 0, 0]} rotation-y={0.2}>
+      {/* <RigidBody position={[-0.5, 0, 0]} rotation-y={0.2}>
         <Text3D {...fontProps}>
-          R
+          A
           <meshMatcapMaterial matcap={basicMatcap} />
         </Text3D>
       </RigidBody>
 
       <RigidBody position={[-0.3, 0, 0]} rotation-y={-0.1}>
         <Text3D {...fontProps}>
-          e
+         R
           <meshMatcapMaterial matcap={basicMatcap} />
         </Text3D>
       </RigidBody>
 
       <RigidBody position={[-0.15, 0, 0]} rotation-y={.1}>
         <Text3D {...fontProps}>
-          a
+          D
           <meshMatcapMaterial matcap={basicMatcap} />
         </Text3D>
       </RigidBody>
 
       <RigidBody position={[-0.05, 0, 0]} rotation-y={0.7}>
         <Text3D {...fontProps}>
-          T
+          E
           <meshMatcapMaterial matcap={basicMatcap} />
         </Text3D>
       </RigidBody>
 
       <RigidBody position={[0.2, 0, 0]} rotation-y={0}>
         <Text3D {...fontProps}>
-          i
+          N
           <meshMatcapMaterial matcap={basicMatcap} />
         </Text3D>
       </RigidBody>
-      <RigidBody position={[0.3, 0, 0]} rotation-y={0}>
-        <Text3D {...fontProps}>
-          V
-          <meshMatcapMaterial matcap={basicMatcap} />
-        </Text3D>
-      </RigidBody>
-      <RigidBody position={[0.48, 0, 0]} rotation-y={0}>
-        <Text3D {...fontProps}>
-          e
-          <meshMatcapMaterial matcap={basicMatcap} />
-        </Text3D>
-      </RigidBody>
+      */}
+      
 
-      <RigidBody position={[0.4, 0, 0.4]} rotation={[0, 0, 0]}>
-        <Text3D {...fontProps} size={0.3} bevelThickness={0.02}>
-          DeVeloPer
-          <meshMatcapMaterial matcap={basicMatcap} />
-        </Text3D>
-      </RigidBody>
+      
     </group>
   );
 }
