@@ -1,13 +1,21 @@
 import { useGLTF } from "@react-three/drei";
 import { RigidBody } from "@react-three/rapier";
+import { useEffect, useRef } from "react";
 
 
 export function Grass(props) {
   const { nodes, materials } = useGLTF("/glbs/grass.glb");
+  const grassRef = useRef()
 
+  useEffect(()=>{
+    props.introTL.from(grassRef.current.position,{
+      y:-10,
+      duration:1
+    })
+  },[])
 
   return (
-    <group {...props} dispose={null} scale={0.00035}>
+    <group {...props} dispose={null} scale={0.00032} ref={grassRef}>
          <RigidBody type="fixed" colliders="trimesh">
         <mesh position={[0, -400, 0]} material={materials.N00_000_Hair_00_HAIR_Instance}>
           <cylinderGeometry args={[12400, 11000, 1100, 100]} />

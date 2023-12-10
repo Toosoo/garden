@@ -20,11 +20,13 @@ function Three({ ready }) {
   const [dayTime, setDayTime] = useState(false);
  
   const tl = useRef();
+  const [introTL,setIntroTL] = useState(gsap.timeline({defaults:{ease:'back'}}));
   let musicTL = useRef();
   const skyRef = useRef();
   const sparklesRef = useRef();
   const dotRef = useRef();
   const textRef = useRef();
+ 
   const [music, setMusic] = useState(true);
 
   const [dayMusic, setDayMusic] = useState(new Audio("/sounds/day.mp3"));
@@ -81,6 +83,8 @@ function Three({ ready }) {
           .to(textRef.current,{
             color:'#ff0000'
           },'<')
+
+         
           
       });
       return () => ctx.revert();
@@ -178,7 +182,7 @@ function Three({ ready }) {
 
     <Text 
     position={[0,-1.5,-5]}
-    scale={8}
+    scale={5.5}
     ref={textRef}
     fillOpacity={.1}
     color={'#f5c916'} 
@@ -188,18 +192,18 @@ function Three({ ready }) {
      </Text>
    
 
-      <group position={[0, -1.5, 0]}>
-        <Tree />
-        <Grass />
-        <Boy />
+      <group position={[0, -1.5, 0]} >
+        <Grass introTL={introTL} />
+        <Tree introTL={introTL}/>
+        <Boy introTL={introTL}/>
       </group>
 
-      <group position={[0, 0, 1]}>
+      <group position={[0, 5, 1]}>
         <Ball />
       </group>
 
-      <group position={[0, -1.3, 3.6]}>
-        <GardenText />
+      <group position={[0, -1.3, 3.6]} >
+        <GardenText introTL={introTL}/>
       </group>
     </>
   );
@@ -216,7 +220,7 @@ export default function Experience({ setReady, ready }) {
         { name: "jump", keys: ["Space"] },
       ]}>
       <Loading setReady={setReady} />
-      <Physics >
+      <Physics>
         <Three ready={ready} />
       </Physics>
     </KeyboardControls>

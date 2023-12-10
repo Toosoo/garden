@@ -1,9 +1,11 @@
 import { Text3D, useTexture } from "@react-three/drei";
 import { RigidBody } from "@react-three/rapier";
+import { useEffect, useRef } from "react";
 
 
-export default function GardenText() {
+export default function GardenText({introTL}) {
   const basicMatcap = useTexture("/basic.png");
+  const textRef = useRef()
 
   const fontProps = {
     font: "/fonts/PR.json",
@@ -17,9 +19,27 @@ export default function GardenText() {
     letterSpacing: 0.01,
     size: 0.5,
   };
+useEffect(()=>{
+
+ 
+  textRef.current.children.forEach(e => {
+    introTL.from(e.scale,{
+      x: 0,
+      y: 0,
+      z: 0,
+      
+      
+    },'<30%')
+  });
+  
+
+
+
+
+},[])
 
   return (
-    <group scale={0.8}>
+    <group scale={0.8} ref={textRef}>
          <RigidBody position={[-1.2, 0, 0]} rotation-y={0.2}>
         <Text3D {...fontProps}>
           
