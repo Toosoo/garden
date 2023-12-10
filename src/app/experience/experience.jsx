@@ -79,7 +79,7 @@ function Three({ ready }) {
             0
           )
           .to(textRef.current,{
-            color:'#6300ff'
+            color:'#ff0000'
           },'<')
           
       });
@@ -216,7 +216,7 @@ export default function Experience({ setReady, ready }) {
         { name: "jump", keys: ["Space"] },
       ]}>
       <Loading setReady={setReady} />
-      <Physics>
+      <Physics >
         <Three ready={ready} />
       </Physics>
     </KeyboardControls>
