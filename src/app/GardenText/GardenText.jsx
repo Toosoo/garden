@@ -9,13 +9,13 @@ export default function GardenText() {
     font: "/fonts/PR.json",
     bevelEnabled: true,
     bevelSize: 0,
-    bevelThickness: 0.05,
+    bevelThickness: 0.03,
     curveSegments: 10,
     bevelOffset: 0,
     bevelSegments: 1,
     height: 0.01,
     letterSpacing: 0.01,
-    size: 0.6,
+    size: 0.5,
   };
 
   return (
