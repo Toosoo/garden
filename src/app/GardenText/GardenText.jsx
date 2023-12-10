@@ -2,7 +2,7 @@ import { Text3D, useTexture } from "@react-three/drei";
 import { RigidBody } from "@react-three/rapier";
 
 
-export default function Text() {
+export default function GardenText() {
   const basicMatcap = useTexture("/basic.png");
 
   const fontProps = {

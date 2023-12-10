@@ -1,12 +1,13 @@
 import { useEffect, useState, useRef } from "react";
 import gsap from "gsap";
-import {  OrbitControls, Sky, Sparkles, Html, KeyboardControls, useProgress } from "@react-three/drei";
-import Text from "../Text/Text";
+import {  OrbitControls, Sky, Sparkles, Html, KeyboardControls, useProgress,Text, Center } from "@react-three/drei";
+import GardenText from "../GardenText/GardenText";
 import { Physics } from "@react-three/rapier";
 import { Grass } from "../Models/Grass";
 import { Tree } from "../Models/Tree";
 import { Boy } from "../Models/Boy";
 import Ball from "../Ball/Ball";
+import { useControls } from "leva";
 
 function Loading({ setReady }) {
   const { active } = useProgress();
@@ -17,11 +18,13 @@ function Loading({ setReady }) {
 
 function Three({ ready }) {
   const [dayTime, setDayTime] = useState(false);
+ 
   const tl = useRef();
   let musicTL = useRef();
   const skyRef = useRef();
   const sparklesRef = useRef();
   const dotRef = useRef();
+  const textRef = useRef();
   const [music, setMusic] = useState(true);
 
   const [dayMusic, setDayMusic] = useState(new Audio("/sounds/day.mp3"));
@@ -35,7 +38,6 @@ function Three({ ready }) {
         tl.current && tl.current.progress(0).kill();
         tl.current = gsap
           .timeline({ defaults: { duration: 0.7, ease: "sine" } })
-
           .from(
             skyRef.current.material.uniforms.sunPosition.value,
             {
@@ -75,7 +77,11 @@ function Three({ ready }) {
               visible: false,
             },
             0
-          );
+          )
+          .to(textRef.current,{
+            color:'#6300ff'
+          },'<')
+          
       });
       return () => ctx.revert();
     }
@@ -87,6 +93,7 @@ function Three({ ready }) {
     if(dayTime){
       nightMusic.play();
       dayMusic.pause();
+
     } else  {
       dayMusic.play();
       nightMusic.pause();
@@ -118,13 +125,13 @@ function Three({ ready }) {
             transformOrigin: "center",
           },
           "<"
-        );
+        )
     } else {
       dayMusic.pause();
       nightMusic.pause();
     }
   };
-
+ 
   return (
     <>
       <Html wrapperClass="switch" className="flex  items-center w-full">
@@ -154,9 +161,10 @@ function Three({ ready }) {
           </svg>
         </button>
       </Html>
+
      
 
-      <OrbitControls makeDefault enableZoom={false} autoRotate={false} minPolarAngle={1.45} maxPolarAngle={1.45} />
+      <OrbitControls makeDefault enableZoom={false} autoRotate={false} minPolarAngle={1.3} maxPolarAngle={1.45} minAzimuthAngle={-.5} maxAzimuthAngle={.5}  />
 
       <Sparkles ref={sparklesRef} scale={5} size={3} color={"gold"} position={[0, 1, 0]} />
 
@@ -166,6 +174,19 @@ function Three({ ready }) {
         turbidity={10} // 60 for dark
         mieCoefficient={0.005} // .05 for dark
       />
+  
+
+    <Text 
+    position={[0,-1.5,-5]}
+    scale={8}
+    ref={textRef}
+    fillOpacity={.1}
+    color={'#f5c916'} 
+    anchorX="center" 
+    anchorY="middle">
+     Garden
+     </Text>
+   
 
       <group position={[0, -1.5, 0]}>
         <Tree />
@@ -178,7 +199,7 @@ function Three({ ready }) {
       </group>
 
       <group position={[0, -1.3, 3.6]}>
-        <Text />
+        <GardenText />
       </group>
     </>
   );
