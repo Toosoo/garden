@@ -74,7 +74,7 @@ function Three({ ready }) {
             0
           )
           .to(
-            sparklesRef.current.material,
+            sparklesRef.current,
             {
               visible: false,
             },
@@ -87,6 +87,7 @@ function Three({ ready }) {
          
           
       });
+      console.log(sparklesRef.current)
       return () => ctx.revert();
     }
   }, [ready]);
@@ -170,7 +171,7 @@ function Three({ ready }) {
 
       <OrbitControls makeDefault enableZoom={false} autoRotate={false} minPolarAngle={1.3} maxPolarAngle={1.45} minAzimuthAngle={-.5} maxAzimuthAngle={.5}  />
 
-      <Sparkles ref={sparklesRef} scale={5} size={3} color={"gold"} position={[0, 1, 0]} />
+      <Sparkles ref={sparklesRef} scale={5} size={3} color={"gold"} position={[0, 1, 0]} visible={true} />
 
       <Sky
         ref={skyRef}

@@ -17,7 +17,7 @@ export default function GardenText({introTL}) {
     bevelSegments: 1,
     height: 0.01,
     letterSpacing: 0.01,
-    size: 0.5,
+    size: 0.4,
   };
 useEffect(()=>{
 
@@ -32,15 +32,11 @@ useEffect(()=>{
     },'<30%')
   });
   
-
-
-
-
 },[])
 
   return (
     <group scale={0.8} ref={textRef}>
-         <RigidBody position={[-1.2, 0, 0]} rotation-y={0.2}>
+         <RigidBody position={[-1, 0, 0]} rotation-y={0.2}>
         <Text3D {...fontProps}>
           
           G
@@ -70,14 +66,14 @@ useEffect(()=>{
           <meshMatcapMaterial matcap={basicMatcap} />
         </Text3D>
       </RigidBody>
-      <RigidBody position={[.6, 0, 0]} rotation-y={0.4}>
+      <RigidBody position={[.4, 0, 0]} rotation-y={0.4}>
         <Text3D {...fontProps}>
           
           E
           <meshMatcapMaterial matcap={basicMatcap} />
         </Text3D>
       </RigidBody>
-      <RigidBody position={[1, 0, 0]} rotation-y={0.7}>
+      <RigidBody position={[.65, 0, 0]} rotation-y={0.7}>
         <Text3D {...fontProps}>
           
           N
