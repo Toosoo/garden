@@ -20,18 +20,10 @@ export default function GardenText({introTL}) {
     size: 0.4,
   };
 useEffect(()=>{
+  introTL.from(textRef.current.position,{
+    y: -5,
+  },'<50%')
 
- 
-  textRef.current.children.forEach(e => {
-    introTL.from(e.scale,{
-      x: 0,
-      y: 0,
-      z: 0,
-      
-      
-    },'<30%')
-  });
-  
 },[])
 
   return (

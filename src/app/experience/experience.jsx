@@ -9,6 +9,8 @@ import { Boy } from "../Models/Boy";
 import Ball from "../Ball/Ball";
 import { useControls } from "leva";
 
+
+
 function Loading({ setReady }) {
   const { active } = useProgress();
   useEffect(() => {
@@ -16,11 +18,10 @@ function Loading({ setReady }) {
   }, [active]);
 }
 
-function Three({ ready }) {
+function Three({ ready,introTL }) {
   const [dayTime, setDayTime] = useState(false);
  
   const tl = useRef();
-  const [introTL,setIntroTL] = useState(gsap.timeline({defaults:{ease:'back'}}));
   let musicTL = useRef();
   const skyRef = useRef();
   const sparklesRef = useRef();
@@ -87,7 +88,7 @@ function Three({ ready }) {
          
           
       });
-      console.log(sparklesRef.current)
+      
       return () => ctx.revert();
     }
   }, [ready]);
@@ -136,6 +137,12 @@ function Three({ ready }) {
       nightMusic.pause();
     }
   };
+
+
+ 
+
+
+
  
   return (
     <>
@@ -210,7 +217,7 @@ function Three({ ready }) {
   );
 }
 
-export default function Experience({ setReady, ready }) {
+export default function Experience({ setReady, ready,introTL }) {
   return (
     <KeyboardControls
       map={[
@@ -222,7 +229,7 @@ export default function Experience({ setReady, ready }) {
       ]}>
       <Loading setReady={setReady} />
       <Physics>
-        <Three ready={ready} />
+        <Three ready={ready} introTL={introTL} />
       </Physics>
     </KeyboardControls>
   );
