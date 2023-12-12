@@ -186,7 +186,7 @@ function Three({ ready, introTL }) {
 
       <Sparkles ref={sparklesRef} scale={5} size={3} color={"gold"} position={[0, 1, 0]} />
 
-      <Cloud concentrate="outside" growth={100} color="#fff" opacity={1} seed={10} bounds={50} volume={1} ref={cloudRef} scale={0} />
+      <Cloud concentrate="outside" growth={100} color="#fff" opacity={1} seed={10} bounds={55} volume={1} ref={cloudRef} scale={0} />
 
       <ambientLight intensity={Math.PI / 1.5} />
 
