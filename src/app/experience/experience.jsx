@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import gsap from "gsap";
-import {  OrbitControls, Sky, Sparkles, Html, KeyboardControls, useProgress,Text, Center } from "@react-three/drei";
+import { OrbitControls, Sky, Sparkles, Html, KeyboardControls, useProgress, Text, Center, Cloud, Clouds, Environment } from "@react-three/drei";
 import GardenText from "../GardenText/GardenText";
 import { Physics } from "@react-three/rapier";
 import { Grass } from "../Models/Grass";
@@ -9,8 +9,6 @@ import { Boy } from "../Models/Boy";
 import Ball from "../Ball/Ball";
 import { useControls } from "leva";
 
-
-
 function Loading({ setReady }) {
   const { active } = useProgress();
   useEffect(() => {
@@ -18,16 +16,17 @@ function Loading({ setReady }) {
   }, [active]);
 }
 
-function Three({ ready,introTL }) {
+function Three({ ready, introTL }) {
   const [dayTime, setDayTime] = useState(false);
- 
+
   const tl = useRef();
   let musicTL = useRef();
   const skyRef = useRef();
+  const cloudRef = useRef();
   const sparklesRef = useRef();
   const dotRef = useRef();
   const textRef = useRef();
- 
+
   const [music, setMusic] = useState(true);
 
   const [dayMusic, setDayMusic] = useState(new Audio("/sounds/day.mp3"));
@@ -40,7 +39,7 @@ function Three({ ready,introTL }) {
       const ctx = gsap.context((context) => {
         tl.current && tl.current.progress(0).kill();
         tl.current = gsap
-          .timeline({ defaults: { duration: 0.7, ease: "sine" } })
+          .timeline({ defaults: { duration: 0.8, ease: "sine" } })
           .from(
             skyRef.current.material.uniforms.sunPosition.value,
             {
@@ -75,23 +74,29 @@ function Three({ ready,introTL }) {
             0
           )
           .to(
-            sparklesRef.current.scale,
+            sparklesRef.current,
             {
-              x: 3,
-              y: 3,
-              z: 3,
+              visible: false,
+            },'0')
+          .to(
+            textRef.current,
+            {
+              color: "#ff0000",
             },
-            0
+            "<"
           )
-          
-          .to(textRef.current,{
-            color:'#ff0000'
-          },'<')
 
-         
-          console.log(sparklesRef.current)
+          .to(
+            cloudRef.current.scale,
+            {
+              x: 1,
+              y: 1,
+              z: 1,
+            },
+            "0"
+          );
       });
-      
+
       return () => ctx.revert();
     }
   }, [ready]);
@@ -99,22 +104,20 @@ function Three({ ready,introTL }) {
   useEffect(() => {
     ready ? tl.current.reversed(dayTime) : null;
 
-    if(dayTime){
+    if (dayTime) {
       nightMusic.play();
       dayMusic.pause();
-
-    } else  {
+    } else {
       dayMusic.play();
       nightMusic.pause();
     }
-
   }, [dayTime]);
 
   const musicSwitch = () => {
     setMusic(!music);
     musicTL.current && musicTL.current.progress(0).kill();
     if (music) {
-      dayTime ?   nightMusic.play() : dayMusic.play() 
+      dayTime ? nightMusic.play() : dayMusic.play();
       musicTL.current = gsap
         .timeline()
         .to(".sound-charts path:nth-child(odd)", {
@@ -134,19 +137,13 @@ function Three({ ready,introTL }) {
             transformOrigin: "center",
           },
           "<"
-        )
+        );
     } else {
       dayMusic.pause();
       nightMusic.pause();
     }
   };
 
-
- 
-
-
-
- 
   return (
     <>
       <Html wrapperClass="switch" className="flex  items-center w-full">
@@ -177,11 +174,21 @@ function Three({ ready,introTL }) {
         </button>
       </Html>
 
-     
+      <OrbitControls
+        makeDefault
+        enableZoom={false}
+        autoRotate={false}
+        minPolarAngle={1.3}
+        maxPolarAngle={1.45}
+        minAzimuthAngle={-0.5}
+        maxAzimuthAngle={0.5}
+      />
 
-      <OrbitControls makeDefault enableZoom={false} autoRotate={false} minPolarAngle={1.3} maxPolarAngle={1.45} minAzimuthAngle={-.5} maxAzimuthAngle={.5}  />
+      <Sparkles ref={sparklesRef} scale={5} size={3} color={"gold"} position={[0, 1, 0]} />
 
-      <Sparkles ref={sparklesRef} scale={5} size={3} color={"gold"} position={[0, 1, 0]}  />
+      <Cloud concentrate="outside" growth={100} color="#fff" opacity={1} seed={10} bounds={50} volume={1} ref={cloudRef} scale={0} />
+
+      <ambientLight intensity={Math.PI / 1.5} />
 
       <Sky
         ref={skyRef}
@@ -189,38 +196,29 @@ function Three({ ready,introTL }) {
         turbidity={10} // 60 for dark
         mieCoefficient={0.005} // .05 for dark
       />
-  
 
-    <Text 
-    position={[0,-1.5,-5]}
-    scale={5.5}
-    ref={textRef}
-    fillOpacity={.1}
-    color={'#f5c916'} 
-    anchorX="center" 
-    anchorY="middle">
-     SCROLL
-     </Text>
-   
+      <Text position={[0, -1.5, -5]} scale={5.5} ref={textRef} fillOpacity={0.1} color={"#f5c916"} anchorX="center" anchorY="middle">
+        SCROLL
+      </Text>
 
-      <group position={[0, -1.5, 0]} >
+      <group position={[0, -1.5, 0]}>
         <Grass introTL={introTL} />
-        <Tree introTL={introTL}/>
-        <Boy introTL={introTL}/>
+        <Tree introTL={introTL} />
+        <Boy introTL={introTL} />
       </group>
 
       <group position={[0, 5, 1]}>
         <Ball />
       </group>
 
-      <group position={[0, -1.3, 3.6]} >
-        <GardenText introTL={introTL}/>
+      <group position={[0, -1.3, 3.6]}>
+        <GardenText introTL={introTL} />
       </group>
     </>
   );
 }
 
-export default function Experience({ setReady, ready,introTL }) {
+export default function Experience({ setReady, ready, introTL }) {
   return (
     <KeyboardControls
       map={[

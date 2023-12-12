@@ -20,7 +20,7 @@ function App() {
 
     ScrollTrigger.create({
       animation:introTL,
-      trigger:'#root',
+      trigger:'#root > div',
       start:'top top',
       end:ScrollTrigger.maxScroll(window),
       pin:true,
@@ -35,7 +35,7 @@ function App() {
       {/* <Intro setReady={setReady} ready={ready} />   */}
 
       
-      <Canvas camera={{ near: 0.1, far: 50, position: [0, 0, 7], rotation: [0, 0, 0] }} ref={canvasRef}>
+      <Canvas camera={{ near: 0.01, far: 100, position: [0, 0, 7], rotation: [0, 0, 0] }} ref={canvasRef}>
       <Suspense>
         <Experience setReady={setReady}  ready={ready} introTL={introTL} />
       </Suspense>
