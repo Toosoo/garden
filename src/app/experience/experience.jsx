@@ -75,18 +75,21 @@ function Three({ ready,introTL }) {
             0
           )
           .to(
-            sparklesRef.current,
+            sparklesRef.current.scale,
             {
-              visible: false,
+              x: 3,
+              y: 3,
+              z: 3,
             },
             0
           )
+          
           .to(textRef.current,{
             color:'#ff0000'
           },'<')
 
          
-          
+          console.log(sparklesRef.current)
       });
       
       return () => ctx.revert();
@@ -178,7 +181,7 @@ function Three({ ready,introTL }) {
 
       <OrbitControls makeDefault enableZoom={false} autoRotate={false} minPolarAngle={1.3} maxPolarAngle={1.45} minAzimuthAngle={-.5} maxAzimuthAngle={.5}  />
 
-      <Sparkles ref={sparklesRef} scale={5} size={3} color={"gold"} position={[0, 1, 0]} visible={true} />
+      <Sparkles ref={sparklesRef} scale={5} size={3} color={"gold"} position={[0, 1, 0]}  />
 
       <Sky
         ref={skyRef}
@@ -196,7 +199,7 @@ function Three({ ready,introTL }) {
     color={'#f5c916'} 
     anchorX="center" 
     anchorY="middle">
-     Garden
+     SCROLL
      </Text>
    
 

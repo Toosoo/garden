@@ -9,7 +9,7 @@ export function Grass(props) {
 
   useEffect(()=>{
     props.introTL.from(grassRef.current.position,{
-      y:-10,
+      y:-12,
       duration:1
     })
   },[])
