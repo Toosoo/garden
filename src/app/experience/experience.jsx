@@ -8,6 +8,7 @@ import { Tree } from "../Models/Tree";
 import { Boy } from "../Models/Boy";
 import Ball from "../Ball/Ball";
 import { useControls } from "leva";
+import { useGSAP } from "@gsap/react";
 
 function Loading({ setReady }) {
   const { active } = useProgress();
@@ -35,8 +36,8 @@ function Three({ ready, introTL }) {
   nightMusic.loop = true;
 
   useEffect(() => {
-    // if (ready) {
-      const ctx = gsap.context((context) => {
+   
+      
         tl.current && tl.current.progress(0).kill();
         tl.current = gsap
           .timeline({ defaults: { duration: 0.8, ease: "sine" } })
@@ -95,11 +96,13 @@ function Three({ ready, introTL }) {
             },
             "0"
           );
-      });
-
-      return () => ctx.revert();
-    // }
-  }, [ready]);
+   
+          introTL.to(textRef.current.position,{
+            y:10
+          },'0')
+    
+    
+  }, []);
 
   useEffect(() => {
     ready ? tl.current.reversed(dayTime) : null;

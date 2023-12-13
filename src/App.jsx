@@ -12,7 +12,7 @@ function App() {
   const [ready, setReady] = useState(false);
   const canvasRef = useRef()
   const [introTL,setIntroTL] = useState(gsap.timeline({defaults:{ease:'back'}}));
-  // {defaults:{ease:'back'}}
+ 
    useGSAP(()=>{
     ScrollTrigger.create({
       animation:introTL,

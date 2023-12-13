@@ -1,6 +1,8 @@
+import { useGSAP } from "@gsap/react";
 import { useGLTF } from "@react-three/drei";
 import { RigidBody } from "@react-three/rapier";
 import { useEffect, useRef } from "react";
+import gsap from "gsap";
 
 
 export function Grass(props) {
@@ -11,7 +13,7 @@ export function Grass(props) {
     props.introTL.from(grassRef.current.position,{
       y:-12,
       duration:1
-    })
+    },'<')
   },[])
 
   return (
