@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import gsap from "gsap";
-import { OrbitControls, Sky, Sparkles, Html, KeyboardControls, useProgress, Text, Center, Cloud, Clouds, Environment } from "@react-three/drei";
+import { OrbitControls, Sky, Sparkles, Html, KeyboardControls, useProgress, Text, Center, Cloud, Clouds, Environment, PresentationControls } from "@react-three/drei";
 import GardenText from "../GardenText/GardenText";
 import { Physics } from "@react-three/rapier";
 import { Grass } from "../Models/Grass";
@@ -35,7 +35,7 @@ function Three({ ready, introTL }) {
   nightMusic.loop = true;
 
   useEffect(() => {
-    if (ready) {
+    // if (ready) {
       const ctx = gsap.context((context) => {
         tl.current && tl.current.progress(0).kill();
         tl.current = gsap
@@ -98,7 +98,7 @@ function Three({ ready, introTL }) {
       });
 
       return () => ctx.revert();
-    }
+    // }
   }, [ready]);
 
   useEffect(() => {
@@ -174,7 +174,7 @@ function Three({ ready, introTL }) {
         </button>
       </Html>
 
-      <OrbitControls
+       <OrbitControls
         makeDefault
         enableZoom={false}
         autoRotate={false}
@@ -182,7 +182,7 @@ function Three({ ready, introTL }) {
         maxPolarAngle={1.45}
         minAzimuthAngle={-0.5}
         maxAzimuthAngle={0.5}
-      />
+      /> 
 
       <Sparkles ref={sparklesRef} scale={5} size={3} color={"gold"} position={[0, 1, 0]} />
 
@@ -201,11 +201,16 @@ function Three({ ready, introTL }) {
         SCROLL
       </Text>
 
+    
+
       <group position={[0, -1.5, 0]}>
         <Grass introTL={introTL} />
         <Tree introTL={introTL} />
         <Boy introTL={introTL} />
       </group>
+
+ 
+
 
       <group position={[0, 5, 1]}>
         <Ball />

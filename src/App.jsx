@@ -14,10 +14,6 @@ function App() {
   const [introTL,setIntroTL] = useState(gsap.timeline({defaults:{ease:'back'}}));
   // {defaults:{ease:'back'}}
    useGSAP(()=>{
-
-    // setIntroTL(gsap.timeline({defaults:{ease:'back'}}))
-  
-
     ScrollTrigger.create({
       animation:introTL,
       trigger:'#root > div',
@@ -30,12 +26,17 @@ function App() {
 
   },{})
 
+
+  const cursorDown = () => document.querySelector('canvas').style = 'cursor:grabbing';
+  const cursorUp = () => document.querySelector('canvas').style = 'cursor:grab';
+  
+
   return (
     <>
       {/* <Intro setReady={setReady} ready={ready} />   */}
 
       
-      <Canvas camera={{ near: 0.01, far: 100, position: [0, 0, 7], rotation: [0, 0, 0] }} ref={canvasRef}>
+      <Canvas id="canvas" camera={{ near: 0.01, far: 100, position: [0, 0, 7], rotation: [0, 0, 0] }} ref={canvasRef} onMouseDown={cursorDown} onMouseUp={cursorUp}>
       <Suspense>
         <Experience setReady={setReady}  ready={ready} introTL={introTL} />
       </Suspense>
@@ -46,3 +47,4 @@ function App() {
 }
 
 export default App;
+
