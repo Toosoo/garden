@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import gsap from "gsap";
-import { OrbitControls, Sky, Sparkles, Html, KeyboardControls, useProgress, Text, Center, Cloud, Clouds, Environment, PresentationControls } from "@react-three/drei";
+import { OrbitControls, Sky, Sparkles, Html, KeyboardControls, useProgress, Text, Center, Cloud, Clouds, Environment, PresentationControls, Float } from "@react-three/drei";
 import GardenText from "../GardenText/GardenText";
 import { Physics } from "@react-three/rapier";
 import { Grass } from "../Models/Grass";
@@ -207,9 +207,11 @@ function Three({ ready, introTL }) {
         mieCoefficient={0.005} // .05 for dark
       />
 
-      <Text position={[0, -1.5, -5]} scale={5.5} ref={textRef} fillOpacity={0.1} color={"#f5c916"} anchorX="center" anchorY="middle">
+
+      <Text position={[0, -1.5, -5]} fontSize={4} ref={textRef} fillOpacity={0.1} color={"#f5c916"} anchorX="center" anchorY="middle">
         SCROLL
       </Text>
+     
 
     
 
