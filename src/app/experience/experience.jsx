@@ -1,6 +1,20 @@
 import { useEffect, useState, useRef } from "react";
 import gsap from "gsap";
-import { OrbitControls, Sky, Sparkles, Html, KeyboardControls, useProgress, Text, Center, Cloud, Clouds, Environment, PresentationControls, Float } from "@react-three/drei";
+import {
+  OrbitControls,
+  Sky,
+  Sparkles,
+  Html,
+  KeyboardControls,
+  useProgress,
+  Text,
+  Center,
+  Cloud,
+  Clouds,
+  Environment,
+  PresentationControls,
+  Float,
+} from "@react-three/drei";
 import GardenText from "../GardenText/GardenText";
 import { Physics } from "@react-three/rapier";
 import { Grass } from "../Models/Grass";
@@ -9,7 +23,7 @@ import { Boy } from "../Models/Boy";
 import Ball from "../Ball/Ball";
 import { useControls } from "leva";
 import { useGSAP } from "@gsap/react";
-import logoURL from '/src/assets/logo.webp'
+import logoURL from "/src/assets/logo.webp";
 
 function Loading({ setReady }) {
   const { active } = useProgress();
@@ -37,75 +51,76 @@ function Three({ ready, introTL }) {
   nightMusic.loop = true;
 
   useGSAP(() => {
-   
-    if(ready) {
+    if (ready) {
+      tl.current && tl.current.progress(0).kill();
+      tl.current = gsap
+        .timeline({ defaults: { duration: 0.8, ease: "sine" } })
+        .from(
+          skyRef.current.material.uniforms.sunPosition.value,
+          {
+            x: 1,
+            y: 0,
+            z: 0,
+          },
+          0
+        )
+        .from(
+          dotRef.current,
+          {
+            left: "58%",
+            backgroundImage: "linear-gradient(#777,#3a3a3a)",
+            duration: 0.5,
+            ease: "linear",
+          },
+          0
+        )
+        .from(
+          skyRef.current.material.uniforms.turbidity,
+          {
+            value: 60,
+          },
+          0
+        )
+        .from(
+          skyRef.current.material.uniforms.mieCoefficient,
+          {
+            value: 0.05,
+          },
+          0
+        )
+        .to(
+          sparklesRef.current,
+          {
+            visible: false,
+          },
+          "0"
+        )
+        .to(
+          textRef.current,
+          {
+            color: "#ff0000",
+          },
+          "<"
+        )
 
-      
-        tl.current && tl.current.progress(0).kill();
-        tl.current = gsap
-          .timeline({ defaults: { duration: 0.8, ease: "sine" } })
-          .from(
-            skyRef.current.material.uniforms.sunPosition.value,
-            {
-              x: 1,
-              y: 0,
-              z: 0,
-            },
-            0
-          )
-          .from(
-            dotRef.current,
-            {
-              left: "58%",
-              backgroundImage: "linear-gradient(#777,#3a3a3a)",
-              duration: 0.5,
-              ease: "linear",
-            },
-            0
-          )
-          .from(
-            skyRef.current.material.uniforms.turbidity,
-            {
-              value: 60,
-            },
-            0
-          )
-          .from(
-            skyRef.current.material.uniforms.mieCoefficient,
-            {
-              value: 0.05,
-            },
-            0
-          )
-          .to(
-            sparklesRef.current,
-            {
-              visible: false,
-            },'0')
-          .to(
-            textRef.current,
-            {
-              color: "#ff0000",
-            },
-            "<"
-          )
+        .to(
+          cloudRef.current.scale,
+          {
+            x: 1,
+            y: 1,
+            z: 1,
+          },
+          "0"
+        );
 
-          .to(
-            cloudRef.current.scale,
-            {
-              x: 1,
-              y: 1,
-              z: 1,
-            },
-            "0"
-          );
-   
-          introTL.to(textRef.current.position,{
-            y:15
-          },'0')
-        }
-   
-    
+      introTL.to(
+        textRef.current.position,
+        {
+          y: 15,
+        },
+        "0"
+      );
+    }
   }, [ready]);
 
   useEffect(() => {
@@ -154,7 +169,7 @@ function Three({ ready, introTL }) {
   return (
     <>
       <Html wrapperClass="switch" className="flex  items-center w-full">
-      <img className="absolute left-10 max-w-[100px]" src={logoURL}/>
+        <img className="absolute left-10 max-w-[100px]" src={logoURL} />
         <button
           className=" switcher relative flex justify-between items-center border mx-auto rounded-full text-white  w-[110px] h-[50px] px-[13px]"
           onClick={() => setDayTime(!dayTime)}>
@@ -180,11 +195,9 @@ function Three({ ready, introTL }) {
             <path d="M61.5766 34.0292L61.5766 39.9708" stroke="white" strokeWidth="3" strokeLinecap="round" />
           </svg>
         </button>
-
-       
       </Html>
 
-       <OrbitControls
+      <OrbitControls
         makeDefault
         enableZoom={false}
         autoRotate={false}
@@ -192,7 +205,7 @@ function Three({ ready, introTL }) {
         maxPolarAngle={1.45}
         minAzimuthAngle={-0.5}
         maxAzimuthAngle={0.5}
-      /> 
+      />
 
       <Sparkles ref={sparklesRef} scale={5} size={3} color={"gold"} position={[0, 1, 0]} />
 
@@ -207,22 +220,15 @@ function Three({ ready, introTL }) {
         mieCoefficient={0.005} // .05 for dark
       />
 
-
       <Text position={[0, -1.5, -5]} fontSize={4} ref={textRef} fillOpacity={0.1} color={"#f5c916"} anchorX="center" anchorY="middle">
         SCROLL
       </Text>
-     
-
-    
 
       <group position={[0, -1.5, 0]}>
         <Grass introTL={introTL} />
         <Tree introTL={introTL} />
         <Boy introTL={introTL} />
       </group>
-
- 
-
 
       <group position={[0, 5, 1]}>
         <Ball />
