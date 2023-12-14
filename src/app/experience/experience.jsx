@@ -9,6 +9,7 @@ import { Boy } from "../Models/Boy";
 import Ball from "../Ball/Ball";
 import { useControls } from "leva";
 import { useGSAP } from "@gsap/react";
+import logoURL from '/src/assets/logo.webp'
 
 function Loading({ setReady }) {
   const { active } = useProgress();
@@ -35,8 +36,10 @@ function Three({ ready, introTL }) {
   dayMusic.loop = true;
   nightMusic.loop = true;
 
-  useEffect(() => {
+  useGSAP(() => {
    
+    if(ready) {
+
       
         tl.current && tl.current.progress(0).kill();
         tl.current = gsap
@@ -98,11 +101,12 @@ function Three({ ready, introTL }) {
           );
    
           introTL.to(textRef.current.position,{
-            y:10
+            y:15
           },'0')
+        }
+   
     
-    
-  }, []);
+  }, [ready]);
 
   useEffect(() => {
     ready ? tl.current.reversed(dayTime) : null;
@@ -150,6 +154,7 @@ function Three({ ready, introTL }) {
   return (
     <>
       <Html wrapperClass="switch" className="flex  items-center w-full">
+      <img className="absolute left-10 max-w-[100px]" src={logoURL}/>
         <button
           className=" switcher relative flex justify-between items-center border mx-auto rounded-full text-white  w-[110px] h-[50px] px-[13px]"
           onClick={() => setDayTime(!dayTime)}>
@@ -175,6 +180,8 @@ function Three({ ready, introTL }) {
             <path d="M61.5766 34.0292L61.5766 39.9708" stroke="white" strokeWidth="3" strokeLinecap="round" />
           </svg>
         </button>
+
+       
       </Html>
 
        <OrbitControls

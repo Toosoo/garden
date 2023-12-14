@@ -1,7 +1,7 @@
 import { Suspense, useRef, useState } from "react";
 import "./App.css";
 import Experience from "./app/experience/experience";
-import Intro from "./app/Intro/Intro";
+// import Intro from "./app/Intro/Intro";
 import { Canvas } from "@react-three/fiber";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/dist/ScrollTrigger";
@@ -11,7 +11,7 @@ import { useGSAP } from "@gsap/react";
 function App() {
   const [ready, setReady] = useState(false);
   const canvasRef = useRef()
-  const [introTL,setIntroTL] = useState(gsap.timeline({defaults:{ease:'back'}}));
+  const [introTL,setIntroTL] = useState(gsap.timeline({defaults:{ease:'none'}}));
  
    useGSAP(()=>{
     ScrollTrigger.create({
